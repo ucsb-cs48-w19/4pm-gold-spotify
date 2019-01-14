@@ -1,0 +1,2 @@
+- Do your best to learn
+- no hurtful comments
