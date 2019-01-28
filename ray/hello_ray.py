@@ -42,7 +42,8 @@ def message_diaplay(text):
 def button(msg, x, y, w, h, ic, ac, action = None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    #print(click)
+    
+    print(click)
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
         pygame.draw.rect(gameDisplay, ac, (x, y, w, h))
         if click[0] == 1 and action != None:
