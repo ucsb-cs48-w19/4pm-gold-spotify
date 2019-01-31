@@ -25,25 +25,29 @@ gameDisplay = pygame.display.set_mode((display_width, display_height))
 clock = pygame.time.Clock()
 
 
+#   Img = pygame.image.load('cloud.jpeg')
+
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
 
-def button(msg, x, y, w, h, ic, ac, action = None):
+def button(msg, x, y, w, h, ic, ac, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     print(click)
+    pygame.draw.rect(gameDisplay, ac, (x, y, w, h))
+    pygame.draw.rect(gameDisplay, ic, (x, y, w, h))
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ((x + (w / 2)), (y + (h / 2)))
+    gameDisplay.blit(textSurf, textRect)
+
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
-        pygame.draw.rect(gameDisplay, ac, (x, y, w, h))
-        if click[0] == 1 and action != None:
+        if click[0] == 1 and action!=None:
             action()
 
-        else:
-            pygame.draw.rect(gameDisplay, ic, (x, y, w, h))
-            textSurf, textRect = text_objects(msg, smallText)
-            textRect.center = ((x + (w / 2)), (y + (h / 2)))
-            gameDisplay.blit(textSurf, textRect)
+
 
 
 def quitgame():
@@ -81,6 +85,7 @@ def game_loop():
 
         gameDisplay.fill(white)
         TextSurf, TextRect = text_objects('Blank Page', largeText)
+        #set center
         TextRect.center = ((display_width / 2), (display_height / 2))
         gameDisplay.blit(TextSurf, TextRect)
 
