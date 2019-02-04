@@ -21,8 +21,8 @@ class World:
         self.buttons = []
         self.texts = []
         self.objects = []
-        self.mouse = pygame.mouse.get_pos()
-        self.click = pygame.mouse.get_pressed()
+        self.mouse = None
+        self.click = None
         # start = 0, in game = 1, end game = 2
         self.state = 0
         self.start_time = 0
