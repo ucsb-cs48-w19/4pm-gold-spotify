@@ -1,18 +1,9 @@
 import pygame, time
 from player import Player
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 200, 0)
-BRIGHT_GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-WIDTH = 800
-HEIGHT = 600
-pygame.font.init()
-BASICFONT = pygame.font.SysFont(None, 50)
-SMALLFONT = pygame.font.SysFont(None, 25)
-
+from gameConstants import Color
+from gameConstants import Dimensions
+from gameConstants import Fonts
 
 class World:
     def __init__(self):
@@ -37,17 +28,17 @@ class World:
         self.texts = []
         self.objects = []
         if self.state == 0:
-            self.texts.append(('Hello world!', BLACK, 400, 100, BASICFONT))
-            self.texts.append(('Start Game', BLACK, 400, 375, SMALLFONT))
+            self.texts.append(('Hello world!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+            self.texts.append(('Start Game', Color.BLACK.value, 400, 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
             if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:
-                self.buttons.append((350, 350, 100, 50, BRIGHT_GREEN))
+                self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
                 # switch state if user click, start timer
                 if self.click[0] == 1:
                     self.state = 1
                     self.start_time = time.time()
             else:
-                self.buttons.append((350, 350, 100, 50, GREEN))
+                self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
         elif self.state == 1:
             # TODO: LINE
@@ -79,17 +70,17 @@ class World:
                 self.state = 2
 
         elif self.state == 2:
-            self.texts.append(('Game Over!', BLACK, 400, 100, BASICFONT))
-            self.texts.append(('Start Again', WHITE, 400, 375, SMALLFONT))
+            self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Color.BASICFONT.value))
+            self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Color.SMALLFONT.value))
             # draw and detect start again button
             if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:
-                self.buttons.append((350, 350, 100, 50, BRIGHT_GREEN))
+                self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
                 if self.click[0] == 1:
                     self.state = 1
                     self.start_time = time.time()
                     self.player = Player()
             else:
-                self.buttons.append((350, 350, 100, 50, GREEN))
+                self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
         else:
             print("Unknown state", self.state)
 
