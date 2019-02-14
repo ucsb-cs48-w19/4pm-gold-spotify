@@ -19,3 +19,6 @@ class Ground:
             self.berries.append(Berry(b[0], b[1]))
         for s in LevelOne.g.value[level][1]:
             self.spiders.append(Spider(s[0], s[1]))
+
+    def berry_pick(self, idx):
+        del self.berries[idx]

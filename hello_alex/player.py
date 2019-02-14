@@ -9,7 +9,7 @@ class Player:
         self.events = []
         self.pressed = None
         self.health = 100
-        self.berry_num = 0
+        self.score = 0
         self.immune_time = 0
 
     def update(self, events):
@@ -29,8 +29,8 @@ class Player:
         return self.health <= 0
 
     def pick(self):
-        self.berry_num += 1
-        return self.berry_num
+        self.score += 1
+        return self.score
 
     def refresh(self, events):
         self.update(events)
