@@ -27,7 +27,7 @@ class World:
         self.click = pygame.mouse.get_pressed()
 
     def start(self):
-        # TODO: change hard code
+        # TODO: change hard code levelone
         for i in range(len(LevelOne.g.value)):
             self.ground.append(Ground(i))
 
@@ -132,8 +132,6 @@ class World:
         else:
             print("Unknown state", self.state)
 
-
-
     def check_col(self, sprite1, sprite2):
         return pygame.sprite.collide_rect(sprite1, sprite2)
 
@@ -164,6 +162,8 @@ class World:
         self.run()
         self.player.refresh(self.events)
         if self.state > 1:
+            for s in self.ground[self.state - 2].spiders:
+                s.update()
             return self.texts, self.buttons, self.objects, self.ground[self.state - 2]
         else:
             return self.texts, self.buttons, self.objects, None

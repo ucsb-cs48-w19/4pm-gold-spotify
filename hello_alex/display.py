@@ -22,13 +22,16 @@ class Display:
         self.refresh()
 
     def draw_game(self, texts, buttons, objects, ground):
+        # insert image here, look at player's image code to create image and use bilt to build it
         self.canvas.fill(Color.WHITE.value)
+
         # draw all the buttons
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
         # draw all the objects
         for player in objects:
-            pygame.draw.ellipse(self.canvas, Color.BLACK.value, (player.x, player.y, 25, 50))
+            # pygame.draw.ellipse(self.canvas, Color.BLACK.value, (player.x, player.y, 25, 50))
+            self.canvas.blit(player.image, player.rect)
             pygame.draw.rect(self.canvas, Color.GREEN.value, (650, 10, player.health, 10))
         # draw all texts
         for t in texts:
@@ -38,7 +41,7 @@ class Display:
             self.canvas.blit(text, textRect)
         if ground is not None:
             for s in ground.spiders:
-                pygame.draw.rect(self.canvas, Color.GREEN.value, s.rect)
+                self.canvas.blit(s.image, s.rect)
             for b in ground.berries:
                 self.canvas.blit(b.image, b.rect)
         pygame.display.flip()

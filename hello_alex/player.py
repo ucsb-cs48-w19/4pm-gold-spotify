@@ -5,12 +5,15 @@ class Player:
     def __init__(self, x=50, y=450):
         self.x = x
         self.y = y
-        self.rect = pygame.Rect(self.x, self.y, 25, 50)
+        self.rect = pygame.Rect(x, y, 25, 50)
         self.events = []
         self.pressed = None
         self.health = 100
         self.score = 0
         self.immune_time = 0
+        self.image = pygame.Surface([x, y], pygame.SRCALPHA)
+        self.image = pygame.image.load("player.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (50, 75))
 
     def update(self, events):
         self.events = events
