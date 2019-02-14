@@ -18,6 +18,7 @@ class Display:
 
     def start(self):
         # for now, it just straight call the game loop
+        self.world.start()
         self.refresh()
 
     def draw_game(self, texts, buttons, objects, ground):

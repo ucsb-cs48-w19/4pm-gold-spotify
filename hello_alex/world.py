@@ -5,6 +5,7 @@ from ground import Ground
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
+from groundConst import LevelOne
 
 
 class World:
@@ -19,12 +20,18 @@ class World:
         # start = 0, end game = 1, ground1 = 2, ground2 = 3
         self.state = 0
         self.pressed_key = None
-        self.ground = None
-        self.level = -1
+        self.ground = []
 
     def update(self):
         self.mouse = pygame.mouse.get_pos()
         self.click = pygame.mouse.get_pressed()
+
+    def start(self):
+        # TODO: change hard code
+        for i in range(len(LevelOne.g.value)):
+            self.ground.append(Ground(i))
+
+        print(self.ground)
 
     def run(self):
         self.buttons = []
@@ -33,7 +40,6 @@ class World:
 
         # start game
         if self.state == 0:
-            self.level = -1
             self.texts.append(('Turkey Trot!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Game', Color.BLACK.value, 400, 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
@@ -47,7 +53,6 @@ class World:
 
         # end game
         elif self.state == 1:
-            self.level = -1
             self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             # draw and detect start again button
@@ -62,53 +67,72 @@ class World:
         # ground 1
         elif self.state == 2:
             self.objects.append(self.player)
-            if self.level != 0:
-                self.ground = Ground(0)
-                self.level = 0
 
             self.user_input()
-            for s in self.ground.spiders:
+            for s in self.ground[self.state - 2].spiders:
                 if self.check_col(self.player, s):
                     if self.player.hit():
                         self.state = 1
-            for b_idx, b in enumerate(self.ground.berries):
+            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
                 if self.check_col(self.player, b):
                     self.player.pick()
-                    self.ground.berry_pick(b_idx)
+                    self.ground[self.state - 2].berry_pick(b_idx)
             # switch state if player at edge of screen
             if self.player.x >= 780:
-                self.state = 3
+                self.state += 1
                 self.player.x = 30
             self.texts.append(
                 ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
-        # ground 2
-        elif self.state == 3:
+        # ground 2, 3, 4
+        elif self.state in [3, 4, 5]:
             self.objects.append(self.player)
-            if self.level != 1:
-                self.ground = Ground(1)
-                self.level = 1
 
             self.user_input()
-            for s in self.ground.spiders:
+            for s in self.ground[self.state - 2].spiders:
                 if self.check_col(self.player, s):
                     if self.player.hit():
                         self.state = 1
-            for b_idx, b in enumerate(self.ground.berries):
+            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
                 if self.check_col(self.player, b):
                     self.player.pick()
-                    self.ground.berry_pick(b_idx)
+                    self.ground[self.state - 2].berry_pick(b_idx)
+            # switch state if player at edge
+            if self.player.x >= 780:
+                self.state += 1
+                self.player.x = 30
+            if self.player.x <= 20:
+                self.state -= 1
+                self.player.x = 780
+            self.texts.append(
+                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
+
+        # ground 5
+        elif self.state == 6:
+            self.objects.append(self.player)
+
+            self.user_input()
+            for s in self.ground[self.state - 2].spiders:
+                if self.check_col(self.player, s):
+                    if self.player.hit():
+                        self.state = 1
+            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
+                if self.check_col(self.player, b):
+                    self.player.pick()
+                    self.ground[self.state - 2].berry_pick(b_idx)
             # switch state if player at edge
             if self.player.x >= 780:
                 self.state = 1
             if self.player.x <= 20:
-                self.state = 2
+                self.state -= 1
                 self.player.x = 780
             self.texts.append(
                 ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
         else:
             print("Unknown state", self.state)
+
+
 
     def check_col(self, sprite1, sprite2):
         return pygame.sprite.collide_rect(sprite1, sprite2)
@@ -139,4 +163,7 @@ class World:
         self.events = events
         self.run()
         self.player.refresh(self.events)
-        return self.texts, self.buttons, self.objects, self.ground
+        if self.state > 1:
+            return self.texts, self.buttons, self.objects, self.ground[self.state - 2]
+        else:
+            return self.texts, self.buttons, self.objects, None
