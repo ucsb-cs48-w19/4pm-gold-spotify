@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 spider1 = Spider(100,10)
 spider2 = Spider(200,20)
 spider3 = Spider(300,10)
-spider4 = Spider(450,40)
+spider4 = Spider(450,20)
 spider5 = Spider(650,35)
 
 

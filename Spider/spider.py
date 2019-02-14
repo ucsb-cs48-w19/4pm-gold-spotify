@@ -34,9 +34,10 @@ class Spider(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         #Change this later to spider image
-        self.image = pygame.image.load(os.path.join(img_folder, "spider.png")).convert()
-        self.image = pygame.transform.scale(self.image, (31,34))
-        self.image.set_colorkey(Color.BLACK.value)
+        self.image = pygame.Surface([x, 0], pygame.SRCALPHA)
+        self.image = pygame.image.load(os.path.join(img_folder,"spider.png")).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (35,30))
+        #self.image.set_colorkey(Color.BLACK.value)
         self.rect = self.image.get_rect()
         self.rect.center = (x, 0)
 
