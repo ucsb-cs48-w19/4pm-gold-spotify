@@ -31,6 +31,8 @@ class World:
         self.texts = []
         self.objects = []
         self.ground = None
+
+        # start game
         if self.state == 0:
             self.texts.append(('Turkey Trot!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Game', Color.BLACK.value, 400, 375, Fonts.SMALLFONT.value))
@@ -44,6 +46,7 @@ class World:
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
+        # end game
         elif self.state == 1:
             self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
@@ -57,57 +60,31 @@ class World:
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
+        # ground 1
         elif self.state == 2:
             self.objects.append(self.player)
             self.ground = Ground(0)
 
-            # detect user key press, tell player to move, record key pressed until key up
-            if self.pressed_key is not None:
-                if self.pressed_key == pygame.K_a:
-                    self.player.move('left')
-                elif self.pressed_key == pygame.K_d:
-                    self.player.move('right')
-            for event in self.events:
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_a:
-                        self.player.move('left')
-                        self.pressed_key = pygame.K_a
-                    elif event.key == pygame.K_d:
-                        self.player.move('right')
-                        self.pressed_key = pygame.K_d
-                    else:
-                        print("Unknown key")
-                elif event.type == pygame.KEYUP and self.pressed_key is not None and event.key == self.pressed_key:
-                    self.pressed_key = None
-
+            self.user_input()
+            for s in self.ground.spiders:
+                if self.check_col(self.player, s):
+                    if self.player.hit():
+                        self.state = 1
             # switch state if player at edge of screen
             if self.player.x >= 780:
                 self.state = 3
-                # TODO
                 self.player.x = 30
 
+        # ground 2
         elif self.state == 3:
-            # TODO: solve repetitive code
             self.objects.append(self.player)
             self.ground = Ground(1)
-            if self.pressed_key is not None:
-                if self.pressed_key == pygame.K_a:
-                    self.player.move('left')
-                elif self.pressed_key == pygame.K_d:
-                    self.player.move('right')
-            for event in self.events:
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_a:
-                        self.player.move('left')
-                        self.pressed_key = pygame.K_a
-                    elif event.key == pygame.K_d:
-                        self.player.move('right')
-                        self.pressed_key = pygame.K_d
-                    else:
-                        print("Unknown key")
-                elif event.type == pygame.KEYUP and self.pressed_key is not None and event.key == self.pressed_key:
-                    self.pressed_key = None
 
+            self.user_input()
+            for s in self.ground.spiders:
+                if self.check_col(self.player, s):
+                    if self.player.hit():
+                        self.state = 1
             # switch state if player at edge
             if self.player.x >= 780:
                 self.state = 1
@@ -117,6 +94,29 @@ class World:
 
         else:
             print("Unknown state", self.state)
+
+    def check_col(self, sprite1, sprite2):
+        return pygame.sprite.collide_rect(sprite1, sprite2)
+
+    def user_input(self):
+        # detect user key press, tell player to move, record key pressed until key up
+        if self.pressed_key is not None:
+            if self.pressed_key == pygame.K_a:
+                self.player.move('left')
+            elif self.pressed_key == pygame.K_d:
+                self.player.move('right')
+        for event in self.events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    self.player.move('left')
+                    self.pressed_key = pygame.K_a
+                elif event.key == pygame.K_d:
+                    self.player.move('right')
+                    self.pressed_key = pygame.K_d
+                else:
+                    print("Unknown key")
+            elif event.type == pygame.KEYUP and self.pressed_key is not None and event.key == self.pressed_key:
+                self.pressed_key = None
 
     def refresh(self, events):
         # the function being called each game loop

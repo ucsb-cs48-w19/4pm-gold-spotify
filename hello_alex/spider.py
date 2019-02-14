@@ -8,7 +8,7 @@ class Spider(pygame.sprite.Sprite):
     # placeholder for spiders
     def __init__(self, x, speed):
         super().__init__()
-        self.rect = pygame.Rect(x, 100, 30, 30)
+        self.rect = pygame.Rect(x, 450, 30, 30)
         self.speed = speed
 
     # def draw(self):

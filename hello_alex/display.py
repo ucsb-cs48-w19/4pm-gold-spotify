@@ -26,8 +26,9 @@ class Display:
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
         # draw all the objects
-        for obj in objects:
-            pygame.draw.ellipse(self.canvas, Color.BLACK.value, (obj.x, obj.y, 25, 50))
+        for player in objects:
+            pygame.draw.ellipse(self.canvas, Color.BLACK.value, (player.x, player.y, 25, 50))
+            pygame.draw.rect(self.canvas, Color.GREEN.value, (650, 10, player.health, 10))
         # draw all texts
         for t in texts:
             text = t[4].render(t[0], True, t[1])
