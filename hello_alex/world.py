@@ -1,4 +1,4 @@
-import pygame, time
+import pygame
 from player import Player
 from ground import Ground
 
@@ -18,9 +18,9 @@ class World:
         self.click = None
         # start = 0, end game = 1, ground1 = 2, ground2 = 3
         self.state = 0
-        self.start_time = 0
         self.pressed_key = None
         self.ground = None
+        self.level = -1
 
     def update(self):
         self.mouse = pygame.mouse.get_pos()
@@ -30,24 +30,24 @@ class World:
         self.buttons = []
         self.texts = []
         self.objects = []
-        self.ground = None
 
         # start game
         if self.state == 0:
+            self.level = -1
             self.texts.append(('Turkey Trot!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Game', Color.BLACK.value, 400, 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
             if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:
                 self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
-                # switch state if user click, start timer
+                # switch state if user click
                 if self.click[0] == 1:
                     self.state = 2
-                    self.start_time = time.time()
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
         # end game
         elif self.state == 1:
+            self.level = -1
             self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             # draw and detect start again button
@@ -55,7 +55,6 @@ class World:
                 self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
                 if self.click[0] == 1:
                     self.state = 2
-                    self.start_time = time.time()
                     self.player = Player()
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
@@ -63,34 +62,50 @@ class World:
         # ground 1
         elif self.state == 2:
             self.objects.append(self.player)
-            self.ground = Ground(0)
+            if self.level != 0:
+                self.ground = Ground(0)
+                self.level = 0
 
             self.user_input()
             for s in self.ground.spiders:
                 if self.check_col(self.player, s):
                     if self.player.hit():
                         self.state = 1
+            for b_idx, b in enumerate(self.ground.berries):
+                if self.check_col(self.player, b):
+                    self.player.pick()
+                    self.ground.berry_pick(b_idx)
             # switch state if player at edge of screen
             if self.player.x >= 780:
                 self.state = 3
                 self.player.x = 30
+            self.texts.append(
+                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
         # ground 2
         elif self.state == 3:
             self.objects.append(self.player)
-            self.ground = Ground(1)
+            if self.level != 1:
+                self.ground = Ground(1)
+                self.level = 1
 
             self.user_input()
             for s in self.ground.spiders:
                 if self.check_col(self.player, s):
                     if self.player.hit():
                         self.state = 1
+            for b_idx, b in enumerate(self.ground.berries):
+                if self.check_col(self.player, b):
+                    self.player.pick()
+                    self.ground.berry_pick(b_idx)
             # switch state if player at edge
             if self.player.x >= 780:
                 self.state = 1
             if self.player.x <= 20:
                 self.state = 2
                 self.player.x = 780
+            self.texts.append(
+                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
         else:
             print("Unknown state", self.state)
