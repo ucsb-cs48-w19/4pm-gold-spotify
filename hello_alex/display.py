@@ -11,7 +11,7 @@ class Display:
     def __init__(self):
         pygame.init()
         self.clock = pygame.time.Clock()
-        self.clock.tick(30)
+        self.clock.tick(60)
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
         self.events = []
         self.world = World()
@@ -20,7 +20,7 @@ class Display:
         # for now, it just straight call the game loop
         self.refresh()
 
-    def draw_game(self, texts, buttons, objects):
+    def draw_game(self, texts, buttons, objects, ground):
         self.canvas.fill(Color.WHITE.value)
         # draw all the buttons
         for button in buttons:
@@ -34,8 +34,12 @@ class Display:
             textRect = text.get_rect()
             textRect.center = (t[2], t[3])
             self.canvas.blit(text, textRect)
-        # update game display
-        pygame.display.update()
+        if ground is not None:
+            for s in ground.spiders:
+                pygame.draw.rect(self.canvas, Color.GREEN.value, s.rect)
+            for b in ground.berries:
+                self.canvas.blit(b.image, b.rect)
+        pygame.display.flip()
 
     # the game loop
     def refresh(self):
@@ -46,6 +50,6 @@ class Display:
                     pygame.quit()
                     quit()
             # throw events to world and get lists of objects that need to render back
-            texts, buttons, objects = self.world.refresh(self.events)
+            texts, buttons, objects, ground = self.world.refresh(self.events)
             # render them
-            self.draw_game(texts, buttons, objects)
+            self.draw_game(texts, buttons, objects, ground)
