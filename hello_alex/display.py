@@ -15,6 +15,10 @@ class Display:
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
         self.events = []
         self.world = World()
+        self.bg = pygame.Surface([0, 0], pygame.SRCALPHA)
+        self.bg = pygame.image.load("gameBackground.png").convert_alpha()
+        self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+        self.rect = self.bg.get_rect()
 
     def start(self):
         # for now, it just straight call the game loop
@@ -23,7 +27,7 @@ class Display:
 
     def draw_game(self, texts, buttons, objects, ground):
         # insert image here, look at player's image code to create image and use bilt to build it
-        self.canvas.fill(Color.WHITE.value)
+        self.canvas.blit(self.bg, self.rect)
 
         # draw all the buttons
         for button in buttons:

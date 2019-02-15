@@ -61,6 +61,9 @@ class World:
                 if self.click[0] == 1:
                     self.state = 2
                     self.player = Player()
+                    self.ground = []
+                    self.start()
+                    self.pressed_key = None
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
