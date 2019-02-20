@@ -31,7 +31,7 @@ class World:
         for i in range(len(LevelOne.g.value)):
             self.ground.append(Ground(i))
 
-        print(self.ground)
+	# print(self.ground)
 
     def run(self):
         self.buttons = []
