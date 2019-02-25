@@ -14,12 +14,12 @@ class Player:
 	# self.image = pygame.Surface([x, y], pygame.SRCALPHA)
 	# self.image = pygame.image.load("player.png").convert_alpha()
         self.images = []
-        self.images.append(pygame.image.load('minWalk1.png').convert_alpha())
-        self.images.append(pygame.image.load('minWalk2.png').convert_alpha())
-        self.images.append(pygame.image.load('minWalk3.png').convert_alpha())
-        self.images.append(pygame.image.load('minWalk4.png').convert_alpha())
-        self.images.append(pygame.image.load('minWalk5.png').convert_alpha())
-        self.images.append(pygame.image.load('minWalk6.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk1.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk2.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk3.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk4.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk5.png').convert_alpha())
+        self.images.append(pygame.image.load('../resources/PlayerFrames/minWalk6.png').convert_alpha())
         self.index = 0
         self.state = 0
         self.image = self.images[self.index]

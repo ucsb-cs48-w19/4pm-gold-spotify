@@ -66,74 +66,46 @@ class World:
                     self.pressed_key = None
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
-
-        # ground 1
+        # ground 1, 2, 3, 4, 5, 6
         elif self.state == 2:
-            self.objects.append(self.player)
-
-            self.user_input()
-            for s in self.ground[self.state - 2].spiders:
-                if self.check_col(self.player, s):
-                    if self.player.hit():
-                        self.state = 1
-            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
-                if self.check_col(self.player, b):
-                    self.player.pick()
-                    self.ground[self.state - 2].berry_pick(b_idx)
-            # switch state if player at edge of screen
+            self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 30
-            self.texts.append(
-                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
-
-        # ground 2, 3, 4
         elif self.state in [3, 4, 5]:
-            self.objects.append(self.player)
-
-            self.user_input()
-            for s in self.ground[self.state - 2].spiders:
-                if self.check_col(self.player, s):
-                    if self.player.hit():
-                        self.state = 1
-            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
-                if self.check_col(self.player, b):
-                    self.player.pick()
-                    self.ground[self.state - 2].berry_pick(b_idx)
-            # switch state if player at edge
+            self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 30
             if self.player.x <= 20:
                 self.state -= 1
                 self.player.x = 780
-            self.texts.append(
-                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
-
-        # ground 5
         elif self.state == 6:
-            self.objects.append(self.player)
-
-            self.user_input()
-            for s in self.ground[self.state - 2].spiders:
-                if self.check_col(self.player, s):
-                    if self.player.hit():
-                        self.state = 1
-            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
-                if self.check_col(self.player, b):
-                    self.player.pick()
-                    self.ground[self.state - 2].berry_pick(b_idx)
-            # switch state if player at edge
+            self.trackObjects()
             if self.player.x >= 780:
                 self.state = 1
             if self.player.x <= 20:
                 self.state -= 1
                 self.player.x = 780
-            self.texts.append(
-                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
         else:
             print("Unknown state", self.state)
+
+    def trackObjects(self):
+        self.objects.append(self.player)
+        self.user_input()
+        for s in self.ground[self.state - 2].spiders:
+            if self.check_col(self.player, s):
+                if self.player.hit():
+#                    s.squeak()
+                    self.state = 1
+            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
+                if self.check_col(self.player, b):
+                    self.player.pick()
+                    self.ground[self.state - 2].berry_pick(b_idx)
+            self.texts.append(
+                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
+
 
     def check_col(self, sprite1, sprite2):
         return pygame.sprite.collide_rect(sprite1, sprite2)
