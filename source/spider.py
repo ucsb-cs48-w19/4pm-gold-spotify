@@ -13,7 +13,7 @@ class Spider(pygame.sprite.Sprite):
 
     speed = 0
 
-    def __init__(self, x, speed):
+    def __init__(self, speed, x, y = 0):
         pygame.sprite.Sprite.__init__(self)
 
         # Change this later to spider image
@@ -22,7 +22,7 @@ class Spider(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (35, 30))
         # self.image.set_colorkey(Color.BLACK.value)
         self.rect = self.image.get_rect()
-        self.rect.center = (x, 0)
+        self.rect.center = (x, y)
 
         self.speed = speed
         self.delta = 0
