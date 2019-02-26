@@ -10,13 +10,14 @@ from world import World
 class Display:
     def __init__(self):
         pygame.init()
+#        pygame.mixer.init()
         self.clock = pygame.time.Clock()
         self.clock.tick(60)
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
         self.events = []
         self.world = World()
         self.bg = pygame.Surface([0, 0], pygame.SRCALPHA)
-        self.bg = pygame.image.load("gameBackground.png").convert_alpha()
+        self.bg = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
 
