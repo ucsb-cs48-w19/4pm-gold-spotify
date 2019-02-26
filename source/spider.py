@@ -13,7 +13,7 @@ class Spider(pygame.sprite.Sprite):
 
     speed = 0
 
-    def __init__(self, speed, x, y = 0):
+    def __init__(self, speed, x,y = 0):
         pygame.sprite.Sprite.__init__(self)
 
         # Change this later to spider image
