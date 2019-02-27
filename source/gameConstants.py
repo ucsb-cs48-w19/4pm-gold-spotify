@@ -1,7 +1,6 @@
 from enum import Enum
 import pygame
 
-pygame.init()
 pygame.font.init()
 
 
@@ -23,5 +22,5 @@ class Fonts(Enum):
 	BASICFONT = pygame.font.SysFont(None, 50)
 	SMALLFONT = pygame.font.SysFont(None, 25)
 
-class Sounds(Enum):
-	SpiderSqueak = "spiderSqueak.wav"
+# class Sounds(Enum):
+# 	SpiderSqueak = "spiderSqueak.wav"

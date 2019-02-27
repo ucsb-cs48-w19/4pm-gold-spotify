@@ -2,7 +2,7 @@ import pygame
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
-from gameConstants import Sounds
+# from gameConstants import Sounds
 
 class Spider(pygame.sprite.Sprite):
     '''
