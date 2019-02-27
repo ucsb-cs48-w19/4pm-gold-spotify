@@ -32,17 +32,44 @@ class Player:
         # this line from original code
         self.image = pygame.transform.scale(self.image, (50, 75))
 
+        #jump
+        self.F = 0
+        self.isJump = 0
+        self.v = 10
+        self.m = 2
+        self.speed = 10
+
     def update(self, events):
         self.events = events
+        if self.isJump:
+
+            # Calculate force (F). F = 0.5 * mass * velocity^2.
+
+            if self.v > 0:
+                self.F = (0.5 * self.m * (self.v * self.v))
+            else:
+                self.F = -(0.5 * self.m * (self.v * self.v))
+
+            # Change position
+            self.y = self.y - self.F
+            # Change velocity
+            self.v = self.v - 1
+
+            # If ground is reached, reset variables.
+            if self.y >= 450:
+                self.y = 450
+                self.isJump = 0
+                self.v = 10
+            self.rect = pygame.Rect(self.x, self.y, 25, 50)
 
     def move(self, direction):
         if self.state == 0:
-            self.state+=1 
-            self.index+=1
+            self.state += 1
+            self.index += 1
         else:
             self.state = 0
-        if self.index>=len(self.images):
-            self.index=0
+        if self.index >= len(self.images):
+            self.index = 0
         self.image = self.images[self.index]
         self.image = pygame.transform.scale(self.image, (50, 75))
 
@@ -50,6 +77,10 @@ class Player:
             self.x -= 10
         elif direction == 'right' and self.x < 780:
             self.x += 10
+        elif direction == 'jump' and self.y <= 450:
+            self.isJump = 1
+
+        # print (self.y, self.F)
         self.rect = pygame.Rect(self.x, self.y, 25, 50)
 
     def hit(self):
