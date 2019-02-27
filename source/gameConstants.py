@@ -8,10 +8,10 @@ pygame.font.init()
 class Color(Enum):
 	BLACK = (0,0,0)
 	WHITE = (255, 255, 255)
-	RED = (255, 0, 0)
+	RED = (175, 39, 29)
 	GREEN = (57, 160, 85)
 	BRIGHT_GREEN = (70, 206, 107)
-	BLUE = (0,0,255)
+	BRIGHT_RED = (224, 48, 35)
 
 
 class Dimensions(Enum):
