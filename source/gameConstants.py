@@ -16,6 +16,7 @@ class Color(Enum):
 class Dimensions(Enum):
 	WIDTH = 800
 	HEIGHT = 600
+	PLAYER_FRAME = 6
 
 
 class Fonts(Enum):

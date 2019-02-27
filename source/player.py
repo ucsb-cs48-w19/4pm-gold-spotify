@@ -1,5 +1,5 @@
 import time, pygame
-from gameConstants import Color
+from gameConstants import Color, Dimensions
 
 
 class Player:
@@ -33,8 +33,7 @@ class Player:
             self.index += 1
         else:
             self.state = 0
-        # TODO: hard coded
-        if self.index >= 5:
+        if self.index >= Dimensions.PLAYER_FRAME.value:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
