@@ -79,7 +79,8 @@ if __name__ == "__main__":
         suite = unittest.TestLoader().loadTestsFromTestCase(player_test)
     else:
         unittest.main(verbosity=2, argv=['first-arg-is-ignored'], exit=False)
-        exit(1)
+        exit(0)
     # ignore the first arg because parser, verbosity set to 2 for more test info, change to 1 for less
     unittest.TextTestRunner(verbosity=2).run(suite)
+    exit(0)
 
