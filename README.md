@@ -13,8 +13,10 @@ You are a little girl wandering through the dark forests, searching for the ingr
 ```python3 -m pip install -U pygame --user```
 * To clone this repo
 ```git clone git@github.com:ucsb-cs48-w19/4pm-turkey-trot.git```
-* To run this game
-```python3 source/main.py```
+* Go into the source directory
+```cd source```
+* Run the game
+```python3 main.py```
 ---
 ### Prerequisites:
 * Python 3.0 or higher
@@ -31,4 +33,5 @@ You are a little girl wandering through the dark forests, searching for the ingr
 * To contribute to our project, first select an issue, move it to In Progress on the Kanban board, and then create a new branch with the name of the issue and make a pull request when it is ready for review. 
 
 ## License 
+* MIT License
 ---
