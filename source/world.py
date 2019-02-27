@@ -31,7 +31,7 @@ class World:
         for i in range(len(LevelOne.g.value)):
             self.ground.append(Ground(i))
 
-	# print(self.ground)
+    # print(self.ground)
 
     def run(self):
         self.buttons = []
@@ -97,7 +97,7 @@ class World:
         for s in self.ground[self.state - 2].spiders:
             if self.check_col(self.player, s):
                 if self.player.hit():
-#                    s.squeak()
+                    #                    s.squeak()
                     self.state = 1
             for b_idx, b in enumerate(self.ground[self.state - 2].berries):
                 if self.check_col(self.player, b):
@@ -105,7 +105,6 @@ class World:
                     self.ground[self.state - 2].berry_pick(b_idx)
             self.texts.append(
                 ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
-
 
     def check_col(self, sprite1, sprite2):
         return pygame.sprite.collide_rect(sprite1, sprite2)

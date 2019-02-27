@@ -1,4 +1,3 @@
-
 import pygame
 from world import World
 
@@ -20,6 +19,16 @@ class Display:
         self.bg = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
+        self.player_images = []
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk1.png').convert_alpha())
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk2.png').convert_alpha())
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk3.png').convert_alpha())
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk4.png').convert_alpha())
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk5.png').convert_alpha())
+        self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk6.png').convert_alpha())
+        self.berry_image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
+        self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
+        self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
 
     def start(self):
         # for now, it just straight call the game loop
@@ -36,7 +45,9 @@ class Display:
         # draw all the objects
         for player in objects:
             # pygame.draw.ellipse(self.canvas, Color.BLACK.value, (player.x, player.y, 25, 50))
-            self.canvas.blit(player.image, player.rect)
+            image = self.player_images[player.index]
+            image = pygame.transform.scale(image, (50, 75))
+            self.canvas.blit(image, player.rect)
             pygame.draw.rect(self.canvas, Color.GREEN.value, (650, 10, player.health, 10))
         # draw all texts
         for t in texts:
@@ -46,9 +57,9 @@ class Display:
             self.canvas.blit(text, textRect)
         if ground is not None:
             for s in ground.spiders:
-                self.canvas.blit(s.image, s.rect)
+                self.canvas.blit(self.spider_image, s.rect)
             for b in ground.berries:
-                self.canvas.blit(b.image, b.rect)
+                self.canvas.blit(self.berry_image, b.rect)
         pygame.display.flip()
 
     # the game loop

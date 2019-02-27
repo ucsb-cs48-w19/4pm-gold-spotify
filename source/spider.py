@@ -15,13 +15,9 @@ class Spider(pygame.sprite.Sprite):
 
     def __init__(self, x, speed):
         pygame.sprite.Sprite.__init__(self)
-#        self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
+        # self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
         # Change this later to spider image
-        self.image = pygame.Surface([x, 0], pygame.SRCALPHA)
-        self.image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, (35, 30))
-        # self.image.set_colorkey(Color.BLACK.value)
-        self.rect = self.image.get_rect()
+        self.rect = pygame.Rect(x, 0, 10, 10)
         self.rect.center = (x, 0)
 
         self.speed = speed
