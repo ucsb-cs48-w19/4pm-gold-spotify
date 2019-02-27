@@ -40,8 +40,9 @@ class World:
 
         # start game
         if self.state == 0:
+            self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
             self.texts.append(('Turkey Trot!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            self.texts.append(('Start Game', Color.BLACK.value, 400, 375, Fonts.SMALLFONT.value))
+            self.texts.append(('Start Game', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
             if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:
                 self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
@@ -53,6 +54,7 @@ class World:
 
         # end game
         elif self.state == 1:
+            self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
             self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             # draw and detect start again button
@@ -103,8 +105,9 @@ class World:
                 if self.check_col(self.player, b):
                     self.player.pick()
                     self.ground[self.state - 2].berry_pick(b_idx)
+            self.buttons.append((1, 10, 130, 30, Color.WHITE.value))
             self.texts.append(
-                ('Your Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
+                ('Your Score:' + str(self.player.score), Color.BLACK.value, 65, 25, Fonts.SMALLFONT.value))
 
 
     def check_col(self, sprite1, sprite2):
