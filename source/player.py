@@ -43,7 +43,7 @@ class Player:
                 self.F = -(0.5 * self.m * (self.v * self.v))
 
             # Change position
-            self.y = self.y - self.F
+            self.y = self.y - self.F / 2
             # Change velocity
             self.v = self.v - 1
 
@@ -64,9 +64,9 @@ class Player:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
-            self.x -= 10
+            self.x -= self.speed
         elif direction == 'right' and self.x < 780:
-            self.x += 10
+            self.x += self.speed
         elif direction == 'jump' and self.y <= 450:
             self.isJump = 1
 
