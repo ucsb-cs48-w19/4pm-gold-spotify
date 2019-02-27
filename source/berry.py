@@ -9,6 +9,4 @@ class Berry(pygame.sprite.Sprite):
         super().__init__()
         self.x = x
         self.y = y
-        self.image = pygame.Surface([x, y], pygame.SRCALPHA)
-        self.image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
         self.rect = pygame.Rect(self.x, self.y, 10, 10)
