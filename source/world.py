@@ -56,6 +56,9 @@ class World:
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
             self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+            self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
+            self.texts.append(
+            ('Your Score:' + str(self.player.score), Color.BLACK.value, 400, 200, Fonts.BASICFONT.value))
             self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             self.texts.append(('Exit Game', Color.WHITE.value, 400, 525, Fonts.SMALLFONT.value))
             # draw and detect start again button
