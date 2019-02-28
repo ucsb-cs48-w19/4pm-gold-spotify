@@ -24,8 +24,35 @@ class Player:
         #        self.rect = self.image[self.index].get_rect()
         # this line from original code
 
+        #jump
+        self.F = 0
+        self.isJump = 0
+        self.v = 10
+        self.m = 2
+        self.speed = 10
+
     def update(self, events):
         self.events = events
+        if self.isJump:
+
+            # Calculate force (F). F = 0.5 * mass * velocity^2.
+
+            if self.v > 0:
+                self.F = (0.5 * self.m * (self.v * self.v))
+            else:
+                self.F = -(0.5 * self.m * (self.v * self.v))
+
+            # Change position
+            self.y = self.y - self.F / 2
+            # Change velocity
+            self.v = self.v - 1
+
+            # If ground is reached, reset variables.
+            if self.y >= 450:
+                self.y = 450
+                self.isJump = 0
+                self.v = 10
+            self.rect = pygame.Rect(self.x, self.y, 25, 50)
 
     def move(self, direction):
         if self.state == 0:
@@ -37,9 +64,13 @@ class Player:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
-            self.x -= 10
+            self.x -= self.speed
         elif direction == 'right' and self.x < 780:
-            self.x += 10
+            self.x += self.speed
+        elif direction == 'jump' and self.y <= 450:
+            self.isJump = 1
+
+        # print (self.y, self.F)
         self.rect = pygame.Rect(self.x, self.y, 25, 50)
 
     def hit(self):
