@@ -11,17 +11,16 @@ class Spider(pygame.sprite.Sprite):
     Include methods for changing speed as well as collision detection
     '''
 
-    speed = 0
-
-    def __init__(self, x, speed):
+    def __init__(self, x, speed, y = 0):
         pygame.sprite.Sprite.__init__(self)
         # self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
         # Change this later to spider image
         self.rect = pygame.Rect(x, 0, 10, 10)
-        self.rect.center = (x, 0)
+        self.rect.center = (x, y)
 
         self.speed = speed
-        self.delta = 0
+        self.delta = speed
+        self.y = y
 
     def update(self):
         if self.rect.bottom >= ((4 * Dimensions.HEIGHT.value / 5)):
