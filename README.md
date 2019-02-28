@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ucsb-cs48-w19/4pm-turkey-trot.svg?branch=master)](https://travis-ci.org/ucsb-cs48-w19/4pm-turkey-trot)
 # Turkey Trot
 
 ## Project Summary
