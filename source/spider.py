@@ -21,6 +21,7 @@ class Spider(pygame.sprite.Sprite):
         self.speed = speed
         self.delta = speed
         self.y = y
+        self.x = x
 
     def update(self):
         if self.rect.bottom >= ((4 * Dimensions.HEIGHT.value / 5)):

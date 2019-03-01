@@ -46,7 +46,8 @@ class Display:
     def draw_game(self, texts, buttons, objects, ground):
         # insert image here, look at player's image code to create image and use bilt to build it
         self.canvas.blit(self.bg, self.rect)
-
+        
+        
         # draw all the buttons
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
@@ -66,6 +67,8 @@ class Display:
         if ground is not None:
             for s in ground.spiders:
                 self.canvas.blit(self.spider_image, s.rect)
+            #Draw Web
+                pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
