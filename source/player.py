@@ -14,20 +14,12 @@ class Player:
         self.immune_time = 0
         self.index = 0
         self.state = 0
-        #        self.transparent = self.image.get_at((0,0))
-        #        print(self.transparent)
-        #       print(Color.BLACK.value)
-        #       self.image.set_colorkey(self.transparent)
-
-        #        self.rect = self.image[self.index].get_rect()
-        # this line from original code
-
-        #jump
         self.F = 0
         self.isJump = 0
         self.v = 10
         self.m = 2
         self.speed = 10
+        self.flash = 0
 
     def update(self, events):
         self.events = events
@@ -73,6 +65,7 @@ class Player:
 
     def hit(self):
         if time.time() - self.immune_time >= 3:
+            self.flash = 30
             self.health -= 1
             self.immune_time = time.time()
         return self.health <= 0
@@ -80,6 +73,14 @@ class Player:
     def pick(self):
         self.score += 1
         return self.score
+
+    def blink(self):
+        if time.time() - self.immune_time < 3:
+            if self.flash == 0:
+                self.flash = 30
+            self.flash -= 1
+            return self.flash > 15
+        return False
 
     def refresh(self, events):
         self.update(events)

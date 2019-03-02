@@ -49,10 +49,10 @@ class Display:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
         # draw all the objects
         for player in objects:
-            # pygame.draw.ellipse(self.canvas, Color.BLACK.value, (player.x, player.y, 25, 50))
             image = self.player_images[player.index]
             image = pygame.transform.scale(image, (50, 75))
-            self.canvas.blit(image, player.rect)
+            if not player.blink():
+                self.canvas.blit(image, player.rect)
             # TODO: Hard coded max health
             for i in range(5):
                 if i < player.health:
