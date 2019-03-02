@@ -81,6 +81,7 @@ class Display:
        
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
+            self.bg.set_alpha(300)
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
        
         pygame.display.flip()
