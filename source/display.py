@@ -15,10 +15,16 @@ class Display:
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
         self.events = []
         self.world = World()
+
         self.bg = pygame.Surface([0, 0], pygame.SRCALPHA)
-        self.bg = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
+        self.bg = pygame.image.load("../resources/Backgrounds/welcomePLACEHOLDER.png").convert_alpha()
+        self.bg_images = {}
+        self.bg_images["Welcome"] = pygame.image.load("../resources/Backgrounds/welcomePLACEHOLDER.png").convert_alpha()
+        self.bg_images["LevelOne"] = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
+        self.bg_images["End"] = pygame.image.load("../resources/Backgrounds/winPLACEHOLDER.png")
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
+
         self.player_images = []
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk1.png').convert_alpha())
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk2.png').convert_alpha())
@@ -26,7 +32,9 @@ class Display:
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk4.png').convert_alpha())
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk5.png').convert_alpha())
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk6.png').convert_alpha())
+
         self.berry_image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
+
         self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
         self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
         self.heart = pygame.image.load('../resources/Heart/heart.png').convert_alpha()
@@ -72,6 +80,19 @@ class Display:
                 pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
+        if self.world.state == 0:
+            self.bg = self.bg_images["Welcome"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+       
+        if self.world.state == 1:
+            self.bg = self.bg_images["End"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+       
+        if self.world.state in [2,6]:
+            self.bg = self.bg_images["LevelOne"]
+            self.bg.set_alpha(300)
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+       
         pygame.display.flip()
 
     # the game loop

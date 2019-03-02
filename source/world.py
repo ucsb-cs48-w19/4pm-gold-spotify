@@ -55,7 +55,10 @@ class World:
         # end game
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-            self.texts.append(('Game Over!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+            if self.player.score >= 10:
+                self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+            else: 
+                self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
             ('Your Score:' + str(self.player.score), Color.BLACK.value, 400, 200, Fonts.BASICFONT.value))
