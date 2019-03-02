@@ -21,7 +21,7 @@ class World:
         self.state = 0
         self.pressed_key = None
         self.ground = []
-
+        self.end = False
     def update(self):
         self.mouse = pygame.mouse.get_pos()
         self.click = pygame.mouse.get_pressed()
@@ -55,9 +55,11 @@ class World:
         # end game
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-            if self.player.score >= 10:
+            if self.end == False:
+                self.texts.append(('You didn\'t make it...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+            elif self.player.score >= 20 and self.end == True:
                 self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            else: 
+            elif self.player.score <=20 and self.end == True:
                 self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
@@ -97,6 +99,7 @@ class World:
                 self.state -= 1
                 self.player.x = 779
         elif self.state == 6:
+            self.end = True
             self.trackObjects()
             if self.player.x >= 780:
                 self.state = 1
@@ -119,9 +122,9 @@ class World:
                 if self.check_col(self.player, b):
                     self.player.pick()
                     self.ground[self.state - 2].berry_pick(b_idx)
-            self.buttons.append((1, 10, 130, 30, Color.WHITE.value))
+            self.buttons.append((1, 10, 100, 30, Color.WHITE.value))
             self.texts.append(
-                ('Your Score:' + str(self.player.score), Color.BLACK.value, 65, 25, Fonts.SMALLFONT.value))
+                ('Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
     def check_col(self, sprite1, sprite2):
         return pygame.sprite.collide_rect(sprite1, sprite2)
