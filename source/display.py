@@ -29,6 +29,10 @@ class Display:
         self.berry_image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
         self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
         self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
+        self.heart = pygame.image.load('../resources/Heart/heart.png').convert_alpha()
+        self.heart = pygame.transform.scale(self.heart, (30, 30))
+        self.heart_b = pygame.image.load('../resources/Heart/heart_b.png').convert_alpha()
+        self.heart_b = pygame.transform.scale(self.heart_b, (30, 30))
 
     def start(self):
         # for now, it just straight call the game loop
@@ -49,7 +53,12 @@ class Display:
             image = self.player_images[player.index]
             image = pygame.transform.scale(image, (50, 75))
             self.canvas.blit(image, player.rect)
-            pygame.draw.rect(self.canvas, Color.GREEN.value, (650, 10, player.health, 10))
+            # TODO: Hard coded max health
+            for i in range(5):
+                if i < player.health:
+                    self.canvas.blit(self.heart, (600 + i * 40, 10))
+                else:
+                    self.canvas.blit(self.heart_b, (600 + i * 40, 10))
         # draw all texts
         for t in texts:
             text = t[4].render(t[0], True, t[1])
