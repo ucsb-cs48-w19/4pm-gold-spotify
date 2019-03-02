@@ -19,7 +19,7 @@ class world_test(unittest.TestCase):
     def test_run_0(self):
         self.world.run()
         self.assertEqual(len(self.world.texts), 2)
-        self.assertEqual(len(self.world.buttons), 1)
+        self.assertEqual(len(self.world.buttons), 2)
 
     def test_run_change_state(self):
         self.world.mouse = [400, 375]
@@ -58,7 +58,7 @@ class player_test(unittest.TestCase):
 
     def test_hit_1(self):
         self.assertEqual(self.player.hit(), False)
-        self.assertEqual(self.player.health, 80)
+        self.assertEqual(self.player.health, 4)
         self.assertGreater(self.player.immune_time, 0)
 
     def test_pick(self):
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     elif test_code == "player":
         suite = unittest.TestLoader().loadTestsFromTestCase(player_test)
     else:
-        unittest.main(verbosity=2, argv=['first-arg-is-ignored'], exit=False)
+        unittest.main(verbosity=2, argv=['first-arg-is-ignored'])
         exit(0)
     # ignore the first arg because parser, verbosity set to 2 for more test info, change to 1 for less
     unittest.TextTestRunner(verbosity=2).run(suite)

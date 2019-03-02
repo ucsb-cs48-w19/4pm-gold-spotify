@@ -77,7 +77,7 @@ class World:
                     self.pressed_key = None
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
-            if 350 + 100 > self.mouse[0] > 350 and 500 + 50 > self.mouse[1] >500:
+            if 350 + 100 > self.mouse[0] > 350 and 500 + 50 > self.mouse[1] > 500:
                 self.buttons.append((350, 500, 100, 50, Color.BRIGHT_RED.value))
                 if self.click[0] == 1:
                     pygame.quit()
@@ -89,23 +89,23 @@ class World:
             self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
-                self.player.x = 30
+                self.player.x = 10
         elif self.state in [3, 4, 5]:
             self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
-                self.player.x = 30
-            if self.player.x <= 20:
+                self.player.x = 10
+            if self.player.x < 10:
                 self.state -= 1
-                self.player.x = 780
+                self.player.x = 779
         elif self.state == 6:
             self.end = True
             self.trackObjects()
             if self.player.x >= 780:
                 self.state = 1
-            if self.player.x <= 20:
+            if self.player.x < 10:
                 self.state -= 1
-                self.player.x = 780
+                self.player.x = 779
 
         else:
             print("Unknown state", self.state)
