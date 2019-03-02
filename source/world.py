@@ -11,6 +11,7 @@ from groundConst import LevelOne
 class World:
     def __init__(self):
         self.player = Player()
+        self.obstacles = []
         self.events = []
         self.buttons = []
         self.texts = []
@@ -55,17 +56,11 @@ class World:
         # end game
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-<<<<<<< HEAD
             if self.end == False:
                 self.texts.append(('You didn\'t make it...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             elif self.player.score >= 20 and self.end == True:
                 self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             elif self.player.score <=20 and self.end == True:
-=======
-            if self.player.score >= 10:
-                self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            else: 
->>>>>>> dfef06161478e8cf7bd195976fa5a34932d08309
                 self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
@@ -93,6 +88,7 @@ class World:
         # ground 1, 2, 3, 4, 5, 6
         elif self.state == 2:
             self.trackObjects()
+            self.obstacles.append((350,500,100,50))
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 10
@@ -105,9 +101,9 @@ class World:
                 self.state -= 1
                 self.player.x = 779
         elif self.state == 6:
-            self.end = True
             self.trackObjects()
             if self.player.x >= 780:
+                self.end = True
                 self.state = 1
             if self.player.x < 10:
                 self.state -= 1
@@ -124,12 +120,21 @@ class World:
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
-            for b_idx, b in enumerate(self.ground[self.state - 2].berries):
-                if self.check_col(self.player, b):
-                    self.player.pick()
-                    self.ground[self.state - 2].berry_pick(b_idx)
-            self.buttons.append((1, 10, 100, 30, Color.WHITE.value))
-            self.texts.append(
+        for b_idx, b in enumerate(self.ground[self.state - 2].berries):
+            if self.check_col(self.player, b):
+                self.player.pick()
+                self.ground[self.state - 2].berry_pick(b_idx)
+        '''
+        for block in self.ground[self.state-2].obstacles:
+            if block.collidepoint(self.player.x+25):
+                player.x -=1
+            if block.collidepoint(self.player.x):
+                player.x +=1
+            if block.collidepoint(self.player.y+50):
+                player.y -=1
+        '''   
+        self.buttons.append((1, 10, 100, 30, Color.WHITE.value))
+        self.texts.append(
                 ('Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))
 
     def check_col(self, sprite1, sprite2):
