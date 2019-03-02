@@ -9,22 +9,11 @@ class Player:
         self.rect = pygame.Rect(x, y, 25, 50)
         self.events = []
         self.pressed = None
-        self.health = 100
+        self.health = 5
         self.score = 0
         self.immune_time = 0
-        # self.image = pygame.Surface([x, y], pygame.SRCALPHA)
-        # self.image = pygame.image.load("player.png").convert_alpha()
         self.index = 0
         self.state = 0
-        #        self.transparent = self.image.get_at((0,0))
-        #        print(self.transparent)
-        #       print(Color.BLACK.value)
-        #       self.image.set_colorkey(self.transparent)
-
-        #        self.rect = self.image[self.index].get_rect()
-        # this line from original code
-
-        #jump
         self.F = 0
         self.isJump = 0
         self.v = 10
@@ -75,13 +64,22 @@ class Player:
 
     def hit(self):
         if time.time() - self.immune_time >= 3:
-            self.health -= 20
+            self.flash = 30
+            self.health -= 1
             self.immune_time = time.time()
         return self.health <= 0
 
     def pick(self):
         self.score += 1
         return self.score
+
+    def blink(self):
+        if time.time() - self.immune_time < 3:
+            if self.flash == 0:
+                self.flash = 30
+            self.flash -= 1
+            return self.flash > 15
+        return False
 
     def refresh(self, events):
         self.update(events)
