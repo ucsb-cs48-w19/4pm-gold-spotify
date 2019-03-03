@@ -120,6 +120,11 @@ class World:
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
+        for h in self.ground[self.state - 2].h_spiders:
+            if self.check_col(self.player, h):
+                if self.player.hit():
+                    #                    s.squeak()
+                    self.state = 1
         for b_idx, b in enumerate(self.ground[self.state - 2].berries):
             if self.check_col(self.player, b):
                 self.player.pick()
@@ -173,6 +178,8 @@ class World:
         if self.state > 1:
             for s in self.ground[self.state - 2].spiders:
                 s.update()
+            for h in self.ground[self.state - 2].h_spiders:
+                h.update()
             return self.texts, self.buttons, self.objects, self.ground[self.state - 2]
         else:
             return self.texts, self.buttons, self.objects, None
