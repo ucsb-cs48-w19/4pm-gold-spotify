@@ -3,6 +3,7 @@ from gameConstants import Dimensions
 from groundConst import LevelOne
 from berry import Berry
 from spider import Spider
+from spider import Hor_Spider
 
 
 class Ground:
@@ -27,7 +28,7 @@ class Ground:
             #self.spiders.append(Spider(s[0], s[1]/3, 2[2]))
             
         for h in LevelOne.g.value[level][2]:
-            self.spiders.append(Hor_Spider(h[0], h[1]))
+            self.spiders.append(Hor_Spider(h[0], h[1], h[2]) )
 
     def berry_pick(self, idx):
         del self.berries[idx]

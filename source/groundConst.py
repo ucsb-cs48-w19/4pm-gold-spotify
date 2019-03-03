@@ -25,7 +25,7 @@ h = (4 / 5) * Dimensions.HEIGHT.value
     #syntax: groundNum = [ [List of berries], [List of vertical Spiders], [List of horizontal Spiders]] -> parameters for Berry and Spider constructors
     # [List of berries] = [ (berry0_x_pos, berry0_y_pos),(berry1_x_pos, berry1_y_pos), ...]
     # [List of vertical spiders] = [ (spider0_x_pos, spider0_speed, spider0_y_pos),(spider1_x_pos, spider1_speed, spider1_y_pos), ...]
-    # [List of horizontal spiders] = [ (spider0_x_start, spider0_x_end), (spider1_x_start, spider1_x_end), ...]
+    # [List of horizontal spiders] = [ (speed, spider0_x_start, spider0_x_end), (speed, spider1_x_start, spider1_x_end), ...]
 
 
 class LevelOne(Enum):
@@ -40,11 +40,15 @@ class LevelOne(Enum):
                 (325, s1, 360), (350, s1, 400), (375, s1, 440), (400, s1, 480), (425, s1, 440), (450, s1, 400), (475, s1, 360), (500, s1, 320),\
                 (525, s1, 280), (550, s1, 240), (575, s1, 200), (600, s1, 160), (625, s1, 120), (650, s1, 80), (675, s1, 40), (700, s1, 0)], []]
     ground2 = [[(100, h, ), (200, h), (300, h), (400, h), (500, h)], \
-               [(75, 2, y0), (150, 2, y0), (225, 2, y0), (375, 2, y0), (425, 2, y0), (525, 2, y0)], []]
-    ground3 = [[(70, h), (140, h), (210, h), (280, h), (350, h), (420, h), (490, h), (560, h)], \
+               [(75, 2, y0), (150, 2, y0), (225, 2, y0), (375, 2, y0), (425, 2, y0), (525, 2, y0)], [(1, 200, 300), (1, 500, 550), (1, 600, 700)]]
+    
+    ground3 = [ [(100, h), (225, h), (325, h), (425, h), (525, h), (625, h), (725, h)], [(150, 1, y0), (300, 1, y1), (350, 1, y0), (500, 1, y1),\
+                (550, 1, y0), (700, 1, y1)], [(1, 150, 300), (1, 350, 500), (1, 550, 700)] ]
+
+    ground5 = [[(70, h), (140, h), (210, h), (280, h), (350, h), (420, h), (490, h), (560, h)], \
                [(120, 1, y0), (180, 2, y0), (240, 1, y0), (300, 2, y0), (360, 1, y0), (420, 2, y0), (480, 1, y0), (540, 2, y0), (600, 1, y0), \
                 (660, 2, y0), (720, 1, y0), (780, 2, y0)], [] ]
 
     ground4 = [[(60, h), (190, h), (230, h), (430, h), (520, h), (540, h)], \
-               [(90, 1, y0), (500, 2, y0), (200, 1, y0), (270, 3, y0), (340, 2, y0), (430, 1, y0)], [] ]
+               [(100, 1, y0), (500, 2, y0), (200, 1, y0), (270, 3, y0), (340, 2, y0), (430, 1, y0)], [] ]
     g = [ground0, ground1, ground2, ground3, ground4]
