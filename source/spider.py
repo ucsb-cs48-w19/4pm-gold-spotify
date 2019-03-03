@@ -78,3 +78,4 @@ class Hor_Spider(pygame.sprite.Sprite):
         
         
         self.rect.x += self.delta
+

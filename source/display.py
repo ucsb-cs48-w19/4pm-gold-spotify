@@ -82,6 +82,8 @@ class Display:
                 self.canvas.blit(self.spider_image, s.rect)
             #Draw Web
                 pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
+            for h in ground.h_spiders:
+                self.canvas.blit(self.spider_image, h.rect)
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
