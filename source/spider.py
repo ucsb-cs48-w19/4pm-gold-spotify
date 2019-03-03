@@ -1,4 +1,5 @@
 import pygame
+import math
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
@@ -25,11 +26,9 @@ class Spider(pygame.sprite.Sprite):
 
     def update(self):
         if self.rect.bottom >= ((4 * Dimensions.HEIGHT.value / 5)):
-            self.delta = -self.speed
-
+            self.delta = -abs(self.speed)
         if self.rect.top < (0):
-            self.delta = self.speed
-
+            self.delta = abs(self.speed)
         self.rect.y += self.delta
 
 #    def squeak(self):
