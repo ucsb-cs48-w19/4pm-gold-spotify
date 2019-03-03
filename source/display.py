@@ -59,18 +59,6 @@ class Display:
         for block in obstacles:
             pygame.draw.rect(self.canvas, Color.BLACK.value, (block[0], block[1], block[2], block[3]))
         '''
-        # draw all the objects
-        for player in objects:
-            image = self.player_images[player.index]
-            image = pygame.transform.scale(image, (50, 75))
-            if not player.blink():
-                self.canvas.blit(image, player.rect)
-            # TODO: Hard coded max health
-            for i in range(5):
-                if i < player.health:
-                    self.canvas.blit(self.heart, (600 + i * 40, 10))
-                else:
-                    self.canvas.blit(self.heart_b, (600 + i * 40, 10))
         # draw all texts
         for t in texts:
             text = t[4].render(t[0], True, t[1])
@@ -97,7 +85,21 @@ class Display:
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+      
+ # draw all the objects
+        for player in objects:
+            image = self.player_images[player.index]
+            image = pygame.transform.scale(image, (50, 75))
+            if not player.blink():
+                self.canvas.blit(image, player.rect)
+            # TODO: Hard coded max health
+            for i in range(5):
+                if i < player.health:
+                    self.canvas.blit(self.heart, (600 + i * 40, 10))
+                else:
+                    self.canvas.blit(self.heart_b, (600 + i * 40, 10))
         pygame.display.flip()
+
 
     # the game loop
     def refresh(self):

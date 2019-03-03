@@ -2,7 +2,7 @@ from enum import Enum
 import pygame
 
 pygame.font.init()
-
+#infoObject = pygame.display.Info()
 
 class Color(Enum):
 	BLACK = (0,0,0)
