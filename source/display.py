@@ -88,8 +88,8 @@ class Display:
       
  # draw all the objects
         for player in objects:
-            image = self.player_images[player.index]
-            image = pygame.transform.scale(image, (50, 75))
+            image = self.player_images[int(player.index)]
+            image = pygame.transform.scale(image, (66, 110))
             if not player.blink():
                 self.canvas.blit(image, player.rect)
             # TODO: Hard coded max health
