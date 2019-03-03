@@ -92,7 +92,7 @@ class World:
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 10
-        elif self.state in [3, 4, 5]:
+        elif self.state in [3, 4, 5, 6, 7, 8]:
             self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
@@ -100,7 +100,7 @@ class World:
             if self.player.x < 10:
                 self.state -= 1
                 self.player.x = 779
-        elif self.state == 6:
+        elif self.state == 9:
             self.trackObjects()
             if self.player.x >= 780:
                 self.end = True
