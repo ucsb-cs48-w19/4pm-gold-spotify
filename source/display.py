@@ -4,7 +4,6 @@ from world import World
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
-from world import World
 
 class Display:
     def __init__(self):
@@ -47,7 +46,7 @@ class Display:
         self.world.start()
         self.refresh()
 
-    def draw_game(self, texts, buttons, objects, ground):
+    def draw_game(self, texts, buttons, objects, ground): #, obstacles):
         # insert image here, look at player's image code to create image and use bilt to build it
         self.canvas.blit(self.bg, self.rect)
         
@@ -55,6 +54,11 @@ class Display:
         # draw all the buttons
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
+        '''
+        #draw in the obstacles
+        for block in obstacles:
+            pygame.draw.rect(self.canvas, Color.BLACK.value, (block[0], block[1], block[2], block[3]))
+        '''
         # draw all the objects
         for player in objects:
             image = self.player_images[player.index]
@@ -90,9 +94,7 @@ class Display:
        
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
-            self.bg.set_alpha(300)
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-       
         pygame.display.flip()
 
     # the game loop
@@ -104,6 +106,8 @@ class Display:
                     pygame.quit()
                     quit()
             # throw events to world and get lists of objects that need to render back
+            #texts, buttons, objects, ground, obstacles = self.world.refresh(self.events)
             texts, buttons, objects, ground = self.world.refresh(self.events)
             # render them
+            #self.draw_game(texts, buttons, objects, ground, obstacles)
             self.draw_game(texts, buttons, objects, ground)
