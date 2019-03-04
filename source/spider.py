@@ -3,7 +3,7 @@ import math
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
-# from gameConstants import Sounds
+from gameConstants import Sounds
 
 class Spider(pygame.sprite.Sprite):
     '''
@@ -26,14 +26,14 @@ class Spider(pygame.sprite.Sprite):
 
     def update(self):
         
-        if self.rect.bottom >= ((4 * Dimensions.HEIGHT.value / 5)):
-            self.delta = -self.speed
+        if self.rect.bottom > ((4 * Dimensions.HEIGHT.value / 5)):
+            self.delta = -abs(self.speed)
         if self.rect.top < (0):
-            self.delta = self.speed
+            self.delta = abs(self.speed)
         self.rect.y += self.delta
 
-#    def squeak(self):
-#        self.mixer.play()
+    def squeak(self):
+        self.mixer.play()
 
 
 class Hor_Spider(pygame.sprite.Sprite):
