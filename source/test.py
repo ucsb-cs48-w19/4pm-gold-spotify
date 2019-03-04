@@ -31,7 +31,7 @@ class world_test(unittest.TestCase):
         self.assertEqual(self.world.player.x, 10)
         self.world.pressed_key = pygame.K_a
         self.world.user_input()
-        self.assertEqual(self.world.player.x, 42)
+        self.assertEqual(self.world.player.x, 2)
 
 
 class player_test(unittest.TestCase):
