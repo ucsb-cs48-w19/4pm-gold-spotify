@@ -43,5 +43,10 @@ class BerryConst(Enum):
 class SpiderConst(Enum):
 	WIDTH = 35
 	HEIGHT = 30
+
+class MenuButton(Enum):
+	X = Dimensions.WIDTH.value/2 - Dimensions.WIDTH.value/16-25
+	WIDTH = Dimensions.WIDTH.value/8 +50
+	HEIGHT = 50
 # class Sounds(Enum):
 # 	SpiderSqueak = "spiderSqueak.wav"

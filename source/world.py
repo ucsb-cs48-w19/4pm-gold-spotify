@@ -2,7 +2,7 @@ import pygame
 from player import Player
 from ground import Ground
 
-from gameConstants import Color, Dimensions, Fonts, PlayerConst, BerryConst, SpiderConst
+from gameConstants import Color, Dimensions, Fonts, PlayerConst, BerryConst, SpiderConst, MenuButton
 from gameConstants import Dimensions
 from gameConstants import Fonts
 from groundConst import LevelOne
@@ -23,6 +23,7 @@ class World:
         self.pressed_key = None
         self.ground = []
         self.end = False
+ 
     def update(self):
         self.mouse = pygame.mouse.get_pos()
         self.click = pygame.mouse.get_pressed()
@@ -43,19 +44,16 @@ class World:
         if self.state == 0:
             self.buttons.append(((Dimensions.WIDTH.value/2)-(Dimensions.WIDTH.value/4), 75, (Dimensions.WIDTH.value/2), 50, Color.WHITE.value))
             self.texts.append(('Turkey Trot!', Color.BLACK.value, (Dimensions.WIDTH.value/2), 100, Fonts.BASICFONT.value))
-            self.texts.append(('Start Game', Color.WHITE.value, (Dimensions.WIDTH.value/2)-(Dimensions.WIDTH.value/32), 375, Fonts.SMALLFONT.value))
+            self.texts.append(('Start Game', Color.WHITE.value, (Dimensions.WIDTH.value/2), 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
-            greenX = Dimensions.WIDTH.value/2 - Dimensions.WIDTH.value/16 - 25
             greenY = 350
-            greenW = Dimensions.WIDTH.value/16 + 50
-            greenH = 50
-            if greenX+greenW > self.mouse[0] > greenX and greenY+greenH > self.mouse[1] > greenY:
-                self.buttons.append((greenX, greenY, greenW, greenH, Color.BRIGHT_GREEN.value))
+            if MenuButton.X.value+MenuButton.WIDTH.value > self.mouse[0] > MenuButton.X.value and greenY+MenuButton.HEIGHT.value > self.mouse[1] > greenY:
+                self.buttons.append((MenuButton.X.value, greenY, MenuButton.WIDTH.value, MenuButton.HEIGHT.value, Color.BRIGHT_GREEN.value))
                 # switch state if user click
                 if self.click[0] == 1:
                     self.state = 2
             else:
-                self.buttons.append((greenX, greenY, greenW, greenH, Color.GREEN.value))
+                self.buttons.append((MenuButton.X.value, greenY, MenuButton.WIDTH.value, MenuButton.HEIGHT.value, Color.GREEN.value))
 
         # end game
         elif self.state == 1:
