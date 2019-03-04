@@ -28,7 +28,7 @@ class world_test(unittest.TestCase):
         self.assertEqual(self.world.state, 2)
 
     def test_user_input(self):
-        self.assertEqual(self.world.player.x, 50)
+        self.assertEqual(self.world.player.x, 10)
         self.world.pressed_key = pygame.K_a
         self.world.user_input()
         self.assertEqual(self.world.player.x, 42)
