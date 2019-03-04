@@ -32,7 +32,7 @@ class PlayerConst(Enum):
 	HEALTH = 5
 	WIDTH = 66
 	HEIGHT = 110
-	GROUND_DIST = 225
+	GROUND_DIST = Dimensions.HEIGHT.value* (1/8) + HEIGHT
 	PLAYER_FRAME = 6
 	HEART_DIM = 30
 
