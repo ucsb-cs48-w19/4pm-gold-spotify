@@ -1,8 +1,10 @@
 from enum import Enum
 import pygame
+from pygame.locals import *
 
 pygame.font.init()
-#infoObject = pygame.display.Info()
+pygame.display.init()
+infoObject = pygame.display.Info()
 
 class Color(Enum):
 	BLACK = (0,0,0)
@@ -14,14 +16,24 @@ class Color(Enum):
 
 
 class Dimensions(Enum):
-	WIDTH = 800
-	HEIGHT = 600
-	PLAYER_FRAME = 6
-
+#	WIDTH = 800
+#	HEIGHT = 600
+	WIDTH = infoObject.current_w
+	HEIGHT = infoObject.current_h
 
 class Fonts(Enum):
 	BASICFONT = pygame.font.SysFont(None, 50)
 	SMALLFONT = pygame.font.SysFont(None, 25)
+
+class PlayerConst(Enum):
+	SPEED = 8
+	JUMP_V = 10
+	MASS = 2
+	HEALTH = 5
+	WIDTH = 66
+	HEIGHT = 110
+	GROUND_DIST = 225
+	PLAYER_FRAME = 6
 
 # class Sounds(Enum):
 # 	SpiderSqueak = "spiderSqueak.wav"

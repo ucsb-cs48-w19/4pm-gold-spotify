@@ -88,26 +88,25 @@ class World:
         # ground 1, 2, 3, 4, 5, 6
         elif self.state == 2:
             self.trackObjects()
-            self.obstacles.append((350,500,100,50))
-            if self.player.x >= 780:
+            if self.player.x >= Dimensions.WIDTH.value:
                 self.state += 1
                 self.player.x = 10
         elif self.state in [3, 4, 5]:
             self.trackObjects()
-            if self.player.x >= 780:
+            if self.player.x >= Dimensions.WIDTH.value:
                 self.state += 1
                 self.player.x = 10
             if self.player.x < 10:
                 self.state -= 1
-                self.player.x = 779
+                self.player.x = Dimensions.WIDTH.value-10
         elif self.state == 6:
             self.trackObjects()
-            if self.player.x >= 780:
+            if self.player.x >= Dimensions.WIDTH.value:
                 self.end = True
                 self.state = 1
             if self.player.x < 10:
                 self.state -= 1
-                self.player.x = 779
+                self.player.x = Dimensions.WIDTH.value-10
 
         else:
             print("Unknown state", self.state)

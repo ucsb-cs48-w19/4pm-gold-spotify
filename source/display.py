@@ -53,7 +53,14 @@ class Display:
         
         # draw all the buttons
         for button in buttons:
-            pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
+            if button[4] == Color.WHITE.value and self.world.state == 0:
+                self.transparentRect = pygame.Surface((button[2],button[3]))
+                self.transparentRect.set_alpha(128)
+                self.transparentRect.fill((255,255,255))
+                self.canvas.blit(self.transparentRect,(button[0],button[1]))
+            else:
+                pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
+
         '''
         #draw in the obstacles
         for block in obstacles:
@@ -75,10 +82,10 @@ class Display:
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
-            self.transparentRect = pygame.Surface((400,600))
-            self.transparentRect.set_alpha(128)
-            self.transparentRect.fill((255,255,255))
-            self.canvas.blit(self.transparentRect,(200,0))
+#            self.transparentRect = pygame.Surface((400,600))
+#            self.transparentRect.set_alpha(128)
+#            self.transparentRect.fill((255,255,255))
+#            self.canvas.blit(self.transparentRect,(200,0))
             self.bg = self.bg_images["Welcome"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
        

@@ -1,24 +1,24 @@
 import time, pygame
-from gameConstants import Color, Dimensions
+from gameConstants import Color, Dimensions, PlayerConst
 
 
 class Player:
-    def __init__(self, x=10, y=440):
+    def __init__(self, x=10, y=Dimensions.HEIGHT.value- PlayerConst.GROUND_DIST.value):
         self.x = x
         self.y = y
-        self.rect = pygame.Rect(x, y, 66, 110)
+        self.rect = pygame.Rect(x, y, PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value)
         self.events = []
         self.pressed = None
-        self.health = 5
+        self.health = PlayerConst.HEALTH.value
         self.score = 0
         self.immune_time = 0
         self.index = 0
         self.state = 0
         self.F = 0
         self.isJump = 0
-        self.v = 10
-        self.m = 2
-        self.speed = 8
+        self.v = PlayerConst.JUMP_V.value
+        self.m = PlayerConst.MASS.value
+        self.speed = PlayerConst.SPEED.value
 
     def update(self, events):
         self.events = events
@@ -37,11 +37,11 @@ class Player:
             self.v = self.v - 1
 
             # If ground is reached, reset variables.
-            if self.y >= 450:
-                self.y = 450
+            if self.y >= Dimensions.HEIGHT.value-PlayerConst.GROUND_DIST.value:
+                self.y = Dimensions.HEIGHT.value-PlayerConst.GROUND_DIST.value
                 self.isJump = 0
                 self.v = 10
-            self.rect = pygame.Rect(self.x, self.y, 25, 50)
+            self.rect = pygame.Rect(self.x, self.y, PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value)
 
     def move(self, direction):
         if self.state == 0:
@@ -49,18 +49,18 @@ class Player:
             self.index += 0.2
         else:
             self.state = 0
-        if self.index >= Dimensions.PLAYER_FRAME.value:
+        if self.index >= PlayerConst.PLAYER_FRAME.value:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
             self.x -= self.speed
-        elif direction == 'right' and self.x < 780:
+        elif direction == 'right' and self.x < Dimensions.WIDTH.value:
             self.x += self.speed
-        elif direction == 'jump' and self.y <= 450:
+        elif direction == 'jump' and self.y <= Dimensions.HEIGHT.value - PlayerConst.GROUND_DIST.value:
             self.isJump = 1
 
         # print (self.y, self.F)
-        self.rect = pygame.Rect(self.x, self.y, 25, 50)
+        self.rect = pygame.Rect(self.x, self.y, PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value)
 
     def hit(self):
         if time.time() - self.immune_time >= 3:
