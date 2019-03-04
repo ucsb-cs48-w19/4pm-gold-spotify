@@ -2,7 +2,7 @@ import pygame
 from player import Player
 from ground import Ground
 
-from gameConstants import Color
+from gameConstants import Color, Dimensions, Fonts, PlayerConst, BerryConst, SpiderConst
 from gameConstants import Dimensions
 from gameConstants import Fonts
 from groundConst import LevelOne
@@ -41,17 +41,21 @@ class World:
 
         # start game
         if self.state == 0:
-            self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-            self.texts.append(('Turkey Trot!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            self.texts.append(('Start Game', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
+            self.buttons.append(((Dimensions.WIDTH.value/2)-(Dimensions.WIDTH.value/4), 75, (Dimensions.WIDTH.value/2), 50, Color.WHITE.value))
+            self.texts.append(('Turkey Trot!', Color.BLACK.value, (Dimensions.WIDTH.value/2), 100, Fonts.BASICFONT.value))
+            self.texts.append(('Start Game', Color.WHITE.value, (Dimensions.WIDTH.value/2)-(Dimensions.WIDTH.value/32), 375, Fonts.SMALLFONT.value))
             # make the button bright if mouse is on it
-            if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:
-                self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
+            greenX = Dimensions.WIDTH.value/2 - Dimensions.WIDTH.value/16 - 25
+            greenY = 350
+            greenW = Dimensions.WIDTH.value/16 + 50
+            greenH = 50
+            if greenX+greenW > self.mouse[0] > greenX and greenY+greenH > self.mouse[1] > greenY:
+                self.buttons.append((greenX, greenY, greenW, greenH, Color.BRIGHT_GREEN.value))
                 # switch state if user click
                 if self.click[0] == 1:
                     self.state = 2
             else:
-                self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
+                self.buttons.append((greenX, greenY, greenW, greenH, Color.GREEN.value))
 
         # end game
         elif self.state == 1:
@@ -116,7 +120,6 @@ class World:
         self.user_input()
         for s in self.ground[self.state - 2].spiders:
             if self.check_col(self.player, s):
-                self.player.x-=3
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
@@ -131,15 +134,7 @@ class World:
             if self.check_col(self.player, b):
                 self.player.pick()
                 self.ground[self.state - 2].berry_pick(b_idx)
-        '''
-        for block in self.ground[self.state-2].obstacles:
-            if block.collidepoint(self.player.x+25):
-                player.x -=1
-            if block.collidepoint(self.player.x):
-                player.x +=1
-            if block.collidepoint(self.player.y+50):
-                player.y -=1
-        '''   
+      
         self.buttons.append((1, 10, 100, 30, Color.WHITE.value))
         self.texts.append(
                 ('Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))

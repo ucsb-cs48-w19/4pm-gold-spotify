@@ -1,9 +1,7 @@
 import pygame
 from world import World
 
-from gameConstants import Color
-from gameConstants import Dimensions
-from gameConstants import Fonts
+from gameConstants import Color, Dimensions, Fonts, PlayerConst, BerryConst, SpiderConst
 
 class Display:
     def __init__(self):
@@ -35,11 +33,11 @@ class Display:
         self.berry_image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
 
         self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
-        self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
+        self.spider_image = pygame.transform.scale(self.spider_image, (SpiderConst.WIDTH.value, SpiderConst.HEIGHT.value))
         self.heart = pygame.image.load('../resources/Heart/heart.png').convert_alpha()
-        self.heart = pygame.transform.scale(self.heart, (30, 30))
+        self.heart = pygame.transform.scale(self.heart, (PlayerConst.HEART_DIM.value, PlayerConst.HEART_DIM.value))
         self.heart_b = pygame.image.load('../resources/Heart/heart_b.png').convert_alpha()
-        self.heart_b = pygame.transform.scale(self.heart_b, (30, 30))
+        self.heart_b = pygame.transform.scale(self.heart_b, (PlayerConst.HEART_DIM.value, PlayerConst.HEART_DIM.value))
 
     def start(self):
         # for now, it just straight call the game loop
@@ -53,6 +51,7 @@ class Display:
         
         # draw all the buttons
         for button in buttons:
+            # weirdly specific case here- just wanted translucent title screen button
             if button[4] == Color.WHITE.value and self.world.state == 0:
                 self.transparentRect = pygame.Surface((button[2],button[3]))
                 self.transparentRect.set_alpha(128)
@@ -82,10 +81,6 @@ class Display:
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
-#            self.transparentRect = pygame.Surface((400,600))
-#            self.transparentRect.set_alpha(128)
-#            self.transparentRect.fill((255,255,255))
-#            self.canvas.blit(self.transparentRect,(200,0))
             self.bg = self.bg_images["Welcome"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
        
@@ -100,15 +95,20 @@ class Display:
  # draw all the objects
         for player in objects:
             image = self.player_images[int(player.index)]
-            image = pygame.transform.scale(image, (66, 110))
+            image = pygame.transform.scale(image, (PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value))
             if not player.blink():
                 self.canvas.blit(image, player.rect)
             # TODO: Hard coded max health
+            self.transparentRect = pygame.Surface((Dimensions.WIDTH.value-50,PlayerConst.HEART_DIM.value))
+            self.transparentRect.set_alpha(200)
+            self.transparentRect.fill((255,255,255))
+            self.canvas.blit(self.transparentRect,(Dimensions.WIDTH.value-300,10))
+
             for i in range(5):
                 if i < player.health:
-                    self.canvas.blit(self.heart, (600 + i * 40, 10))
+                    self.canvas.blit(self.heart, ((Dimensions.WIDTH.value-250)+ i * 40, 10))
                 else:
-                    self.canvas.blit(self.heart_b, (600 + i * 40, 10))
+                    self.canvas.blit(self.heart_b, ((Dimensions.WIDTH.value-250) + i * 40, 10))
         pygame.display.flip()
 
 

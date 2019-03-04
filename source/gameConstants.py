@@ -34,6 +34,14 @@ class PlayerConst(Enum):
 	HEIGHT = 110
 	GROUND_DIST = 225
 	PLAYER_FRAME = 6
+	HEART_DIM = 30
 
+class BerryConst(Enum):
+	WIDTH = 10
+	HEIGHT = 10
+
+class SpiderConst(Enum):
+	WIDTH = 35
+	HEIGHT = 30
 # class Sounds(Enum):
 # 	SpiderSqueak = "spiderSqueak.wav"

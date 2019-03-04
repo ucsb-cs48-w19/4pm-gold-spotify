@@ -1,7 +1,5 @@
 import pygame
-from gameConstants import Color
-from gameConstants import Dimensions
-from gameConstants import Fonts
+from gameConstants import Dimensions, SpiderConst
 # from gameConstants import Sounds
 
 class Spider(pygame.sprite.Sprite):
@@ -14,8 +12,8 @@ class Spider(pygame.sprite.Sprite):
     def __init__(self, x, speed, y = 0):
         pygame.sprite.Sprite.__init__(self)
         # self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
-        # Change this later to spider image
-        self.rect = pygame.Rect(x, y, 10, 10)
+      
+        self.rect = pygame.Rect(x, y, SpiderConst.WIDTH.value, SpiderConst.HEIGHT.value)
         self.rect.center = (x, y)
 
         self.speed = speed
@@ -49,22 +47,13 @@ class Hor_Spider(pygame.sprite.Sprite):
     def __init__(self, speed, x_start = 0, x_end = Dimensions.WIDTH.value, y = 4* Dimensions.HEIGHT.value/5):
         pygame.sprite.Sprite.__init__(self)
     
-        self.rect = pygame.Rect(x_start, y, 10, 10)
+        self.rect = pygame.Rect(x_start, y, SpiderConst.WIDTH.value, SpiderConst.HEIGHT.value)
         self.rect.center = (x_start, y)
-        
-        #Change this later to spider image
-#        self.image = pygame.Surface([x_start, 0], pygame.SRCALPHA)
-#        self.image = pygame.image.load(os.path.join(img_folder,"spider.png")).convert_alpha()
-#        self.image = pygame.transform.scale(self.image, (35,30))
-        #self.image.set_colorkey(Color.BLACK.value)
-
+       
         self.x_end = x_end
         self.x_start = x_start
         self.y = y
-        
-        
-        
-        
+         
         self.speed = speed
         self.delta = speed
     
