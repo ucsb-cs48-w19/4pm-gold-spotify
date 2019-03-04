@@ -117,14 +117,17 @@ class World:
         self.user_input()
         for s in self.ground[self.state - 2].spiders:
             if self.check_col(self.player, s):
+                self.player.x-=3
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
         for h in self.ground[self.state - 2].h_spiders:
             if self.check_col(self.player, h):
+                h.delta = -h.delta
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
+     
         for b_idx, b in enumerate(self.ground[self.state - 2].berries):
             if self.check_col(self.player, b):
                 self.player.pick()
