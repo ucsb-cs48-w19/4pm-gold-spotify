@@ -9,6 +9,7 @@ class Player:
         self.rect = pygame.Rect(x, y, PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value)
         self.events = []
         self.pressed = None
+        self.orientation = 'RIGHT'
         self.health = PlayerConst.HEALTH.value
         self.score = 0
         self.immune_time = 0
@@ -46,15 +47,17 @@ class Player:
     def move(self, direction):
         if self.state == 0:
             self.state += 1
-            self.index += 0.2
+            self.index += 0.25
         else:
             self.state = 0
         if self.index >= PlayerConst.PLAYER_FRAME.value:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
+            self.orientation = 'LEFT'
             self.x -= self.speed
         elif direction == 'right' and self.x < Dimensions.WIDTH.value:
+            self.orientation = 'RIGHT'
             self.x += self.speed
         elif direction == 'jump' and self.y <= Dimensions.HEIGHT.value - PlayerConst.GROUND_DIST.value:
             self.isJump = 1

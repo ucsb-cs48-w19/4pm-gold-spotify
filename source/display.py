@@ -97,7 +97,10 @@ class Display:
             image = self.player_images[int(player.index)]
             image = pygame.transform.scale(image, (PlayerConst.WIDTH.value, PlayerConst.HEIGHT.value))
             if not player.blink():
-                self.canvas.blit(image, player.rect)
+                if player.orientation== 'RIGHT':
+                    self.canvas.blit(image, player.rect)
+                else:
+                    self.canvas.blit(pygame.transform.flip(image,True, False), player.rect)
             # TODO: Hard coded max health
             self.transparentRect = pygame.Surface((Dimensions.WIDTH.value-50,PlayerConst.HEART_DIM.value))
             self.transparentRect.set_alpha(200)
