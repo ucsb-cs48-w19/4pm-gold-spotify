@@ -26,7 +26,7 @@ class Fonts(Enum):
 	SMALLFONT = pygame.font.SysFont(None, 25)
 
 class PlayerConst(Enum):
-	SPEED = 8
+	SPEED = Dimensions.WIDTH.value/100
 	JUMP_V = 10
 	MASS = 2
 	HEALTH = 5
