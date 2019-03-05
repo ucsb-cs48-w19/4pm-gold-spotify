@@ -33,7 +33,7 @@ class Display:
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk5.png').convert_alpha())
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk6.png').convert_alpha())
 
-        self.object_image = [pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha(),
+        self.food_image = [pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha(),
                             pygame.image.load("../resources/Pumpkin/pumpkin.png").convert_alpha(),
                             pygame.image.load("../resources/Turkey/turkey.png").convert_alpha()]
         self.berry_image_big = pygame.image.load("../resources/Berry/berry_big.png").convert_alpha()
@@ -51,15 +51,42 @@ class Display:
         self.heart_b = pygame.image.load('../resources/Heart/heart_b.png').convert_alpha()
         self.heart_b = pygame.transform.scale(self.heart_b, (30, 30))
 
-
     def start(self):
         self.refresh()
 
     def draw_game(self, texts, buttons, objects, ground): #, obstacles):
         # insert image here, look at player's image code to create image and use bilt to build it
+        if self.world.state == 0:
+            self.bg = self.bg_images["Welcome"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+
+        if self.world.state == 1:
+            self.bg = self.bg_images["Welcome"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+
+        if self.world.state in [3, 6]:
+            self.bg = self.bg_images["LevelOne"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+        # map screen
+
         self.canvas.blit(self.bg, self.rect)
-        
-        
+
+        if ground is not None:
+            for s in ground.spiders:
+                self.canvas.blit(self.spider_image, s.rect)
+            #Draw Web
+                pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
+            for h in ground.h_spiders:
+                self.canvas.blit(self.spider_image, h.rect)
+            for o in ground.foods:
+                self.canvas.blit(self.food_image[self.world.level - 1], o.rect)
+
+        if self.world.pause:
+            self.transparentRect = pygame.Surface((400, 600))
+            self.transparentRect.set_alpha(128)
+            self.transparentRect.fill((255, 255, 255))
+            self.canvas.blit(self.transparentRect, (200, 0))
+
         # draw all the buttons
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
@@ -74,34 +101,14 @@ class Display:
             textRect = text.get_rect()
             textRect.center = (t[2], t[3])
             self.canvas.blit(text, textRect)
-        if ground is not None:
-            for s in ground.spiders:
-                self.canvas.blit(self.spider_image, s.rect)
-            #Draw Web
-                pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
-            for h in ground.h_spiders:
-                self.canvas.blit(self.spider_image, h.rect)
-            for o in ground.berries:
-                self.canvas.blit(self.object_image[self.world.level - 1], o.rect)
-        if self.world.state == 0:
-            self.bg = self.bg_images["Welcome"]
-            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-       
-        if self.world.state == 1:
-            self.bg = self.bg_images["Welcome"]
-            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-       
-        if self.world.state in [3,6]:
-            self.bg = self.bg_images["LevelOne"]
-            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-        # map screen
+
         if self.world.state == 2:
             self.bg = self.bg_images["Map"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-            self.canvas.blit(self.berry_image_big, (200,200))
-            self.canvas.blit(self.pumpkin_image_big, (310,400))
-            self.canvas.blit(self.turkey_image_big, (500,250))
-                
+            self.canvas.blit(self.berry_image_big, (200, 200))
+            self.canvas.blit(self.pumpkin_image_big, (310, 400))
+            self.canvas.blit(self.turkey_image_big, (500, 250))
+
         # draw all the objects
         for player in objects:
             image = self.player_images[int(player.index)]

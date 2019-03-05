@@ -25,6 +25,7 @@ class World:
         self.end = False
         self.level = 0
         self.cleared_level = {1}
+        self.pause = False
 
     def update(self):
         self.mouse = pygame.mouse.get_pos()
@@ -40,6 +41,35 @@ class World:
         self.buttons = []
         self.texts = []
         self.objects = []
+
+        # pause menu
+        if self.pause:
+            self.texts.append(('Resume Game', Color.WHITE.value, 400, 175, Fonts.SMALLFONT.value))
+            if 325 + 150 > self.mouse[0] > 325 and 150 + 50 > self.mouse[1] > 150:
+                self.buttons.append((325, 150, 150, 50, Color.BRIGHT_GREEN.value))
+                if self.click[0] == 1:
+                    self.pause = False
+            else:
+                self.buttons.append((325, 150, 150, 50, Color.GREEN.value))
+
+            self.texts.append(('Return to Menu', Color.WHITE.value, 400, 275, Fonts.SMALLFONT.value))
+            if 325 + 150 > self.mouse[0] > 325 and 250 + 50 > self.mouse[1] > 250:
+                self.buttons.append((325, 250, 150, 50, Color.BRIGHT_GREEN.value))
+                if self.click[0] == 1:
+                    self.state = 0
+                    self.pause = False
+            else:
+                self.buttons.append((325, 250, 150, 50, Color.GREEN.value))
+
+            self.texts.append(('Quit Game', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
+            if 325 + 150 > self.mouse[0] > 325 and 350 + 50 > self.mouse[1] > 350:
+                self.buttons.append((325, 350, 150, 50, Color.BRIGHT_RED.value))
+                if self.click[0] == 1:
+                    pygame.quit()
+                    quit()
+            else:
+                self.buttons.append((325, 350, 150, 50, Color.RED.value))
+            return
 
         # start game
         if self.state == 0:
@@ -183,10 +213,10 @@ class World:
                     #                    s.squeak()
                     self.state = 1
      
-        for b_idx, b in enumerate(self.ground[self.state - 3].berries):
+        for b_idx, b in enumerate(self.ground[self.state - 3].foods):
             if self.check_col(self.player, b):
                 self.player.pick()
-                self.ground[self.state - 3].berry_pick(b_idx)
+                self.ground[self.state - 3].food_pick(b_idx)
         '''
         for block in self.ground[self.state-2].obstacles:
             if block.collidepoint(self.player.x+25):
@@ -214,7 +244,9 @@ class World:
                 self.player.move('jump')
         for event in self.events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_ESCAPE:
+                    self.pause = True
+                elif event.key == pygame.K_a:
                     self.player.move('left')
                     self.pressed_key = pygame.K_a
                 elif event.key == pygame.K_d:
@@ -234,10 +266,11 @@ class World:
         self.run()
         self.player.refresh(self.events)
         if self.state > 2:
-            for s in self.ground[self.state - 3].spiders:
-                s.update()
-            for h in self.ground[self.state - 3].h_spiders:
-                h.update()
+            if not self.pause:
+                for s in self.ground[self.state - 3].spiders:
+                    s.update()
+                for h in self.ground[self.state - 3].h_spiders:
+                    h.update()
             return self.texts, self.buttons, self.objects, self.ground[self.state - 3]
         else:
             return self.texts, self.buttons, self.objects, None
