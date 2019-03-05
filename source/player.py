@@ -46,7 +46,7 @@ class Player:
     def move(self, direction):
         if self.state == 0:
             self.state += 1
-            self.index += 0.2
+            self.index += 0.5
         else:
             self.state = 0
         if self.index >= Dimensions.PLAYER_FRAME.value:

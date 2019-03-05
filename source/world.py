@@ -165,7 +165,7 @@ class World:
                 elif event.key == pygame.K_d:
                     self.player.move('right')
                     self.pressed_key = pygame.K_d
-                elif event.key == pygame.K_w:
+                elif event.key == pygame.K_SPACE:
                     self.player.move('jump')
                 else:
                     print("Unknown key")
