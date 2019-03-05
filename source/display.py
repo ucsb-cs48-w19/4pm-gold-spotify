@@ -8,7 +8,7 @@ from gameConstants import Fonts
 class Display:
     def __init__(self):
         pygame.init()
-#        pygame.mixer.init()
+        pygame.mixer.init()
         self.clock = pygame.time.Clock()
         self.clock.tick(60)
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
@@ -51,7 +51,12 @@ class Display:
         self.heart_b = pygame.image.load('../resources/Heart/heart_b.png').convert_alpha()
         self.heart_b = pygame.transform.scale(self.heart_b, (30, 30))
 
+        #background music playing
+        self.background_s = pygame.mixer.music.load("../resources/sound/background_music.ogg")
+        pygame.mixer.music.set_volume(0.4)
+
     def start(self):
+        pygame.mixer.music.play(loops=-1)
         self.refresh()
 
     def draw_game(self, texts, buttons, objects, ground): #, obstacles):
