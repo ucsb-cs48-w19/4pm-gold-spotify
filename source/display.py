@@ -34,6 +34,9 @@ class Display:
         self.player_images.append(pygame.image.load('../resources/PlayerFrames/minWalk6.png').convert_alpha())
 
         self.berry_image = pygame.image.load("../resources/Berry/berrySmall.png").convert_alpha()
+        self.berry_image_big = pygame.image.load("../resources/Berry/berry_big.png").convert_alpha()
+        self.pumpkin_image_big = pygame.image.load("../resources/Pumpkin/pumpkin_big.png").convert_alpha()
+        self.turkey_image_big = pygame.image.load("../resources/Turkey/turkey_big.png").convert_alpha()
 
         self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
         self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
@@ -95,7 +98,9 @@ class Display:
         if self.world.state == -1:
             self.bg = self.bg_images["Map"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-            self.canvas.blit(self.berry_image, (300,300))
+            self.canvas.blit(self.berry_image_big, (200,200))
+            self.canvas.blit(self.pumpkin_image_big, (350,350))
+            self.canvas.blit(self.turkey_image_big, (500,300))
                 
  # draw all the objects
         for player in objects:
