@@ -98,7 +98,7 @@ class Display:
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-        
+        # map screen
         if self.world.state == -1:
             self.bg = self.bg_images["Map"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
