@@ -203,13 +203,15 @@ class World:
         self.user_input()
         for s in self.ground[self.state - 3].spiders:
             if self.check_col(self.player, s):
+                #s.delta = -s.delta
                 if self.player.hit():
-                    #                    s.squeak()
                     self.state = 1
+
         for h in self.ground[self.state - 3].h_spiders:
             if self.check_col(self.player, h):
                 h.delta = -h.delta
                 if self.player.hit():
+                    
                     #                    s.squeak()
                     self.state = 1
      
