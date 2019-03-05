@@ -28,10 +28,10 @@ class world_test(unittest.TestCase):
         self.assertEqual(self.world.state, 2)
 
     def test_user_input(self):
-        self.assertEqual(self.world.player.x, 50)
+        self.assertEqual(self.world.player.x, 10)
         self.world.pressed_key = pygame.K_a
         self.world.user_input()
-        self.assertEqual(self.world.player.x, 42)
+        self.assertEqual(self.world.player.x, 2)
 
 
 class player_test(unittest.TestCase):
@@ -47,14 +47,14 @@ class player_test(unittest.TestCase):
         self.assertEqual(self.player.x, 92)
         self.assertEqual(self.player.y, 200)
         self.assertEqual(self.player.state, 1)
-        self.assertEqual(self.player.index, 1)
+        self.assertEqual(self.player.index, 0.2)
 
     def test_move_right(self):
         self.player.move('right')
         self.assertEqual(self.player.x, 108)
         self.assertEqual(self.player.y, 200)
         self.assertEqual(self.player.state, 1)
-        self.assertEqual(self.player.index, 1)
+        self.assertEqual(self.player.index, 0.2)
 
     def test_hit_1(self):
         self.assertEqual(self.player.hit(), False)

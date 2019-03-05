@@ -3,10 +3,10 @@ from gameConstants import Color, Dimensions
 
 
 class Player:
-    def __init__(self, x=50, y=450):
+    def __init__(self, x=10, y=440):
         self.x = x
         self.y = y
-        self.rect = pygame.Rect(x, y, 25, 50)
+        self.rect = pygame.Rect(x, y, 66, 110)
         self.events = []
         self.pressed = None
         self.health = 5
@@ -46,7 +46,7 @@ class Player:
     def move(self, direction):
         if self.state == 0:
             self.state += 1
-            self.index += 1
+            self.index += 0.2
         else:
             self.state = 0
         if self.index >= Dimensions.PLAYER_FRAME.value:
