@@ -23,14 +23,16 @@ class World:
         self.pressed_key = None
         self.ground = []
         self.end = False
+        self.level = 0
+        self.cleared_level = {1}
+
     def update(self):
         self.mouse = pygame.mouse.get_pos()
         self.click = pygame.mouse.get_pressed()
 
     def start(self):
-        # TODO: change hard code levelone
-        for i in range(len(LevelOne.g.value)):
-            self.ground.append(Ground(i))
+        for i in range(len(LevelOne.g.value[self.level - 1])):
+            self.ground.append(Ground(self.level - 1, i))
 
     # print(self.ground)
 
@@ -49,35 +51,22 @@ class World:
                 self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
                 # switch state if user click
                 if self.click[0] == 1:
-                    self.state = -1
+                    self.state = 2
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
-
-        #map screen
-        #default all just go to state 2
-        elif self.state == -1:
-            #if berry clicked
-            if 70 + 200 > self.mouse[0] > 200 and 70 + 200 > self.mouse[1] >200:
-                if self.click[0]==1:
-                    self.state=2
-            #if pumpkin clicked
-            if 70 + 310 > self.mouse[0] > 310 and 70 + 400 > self.mouse[1] >400:
-                if self.click[0]==1:
-                    self.state=2
-            #if turkey clicked
-            if 70 + 500 > self.mouse[0] > 500 and 70 + 250 > self.mouse[1] >250:
-                if self.click[0]==1:
-                    self.state=2
             
         # end game
         elif self.state == 1:
-            self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-            if self.end == False:
+            if not self.end:
                 self.texts.append(('You didn\'t make it...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            elif self.player.score >= 20 and self.end == True:
+                self.buttons.append((240, 75, 320, 50, Color.WHITE.value))
+            elif self.player.score >= 20 and self.end:
                 self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            elif self.player.score <=20 and self.end == True:
+                self.buttons.append((310, 75, 180, 50, Color.WHITE.value))
+                self.cleared_level.add(self.level + 1)
+            elif self.player.score <=20 and self.end:
                 self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+                self.buttons.append((220, 75, 350, 50, Color.WHITE.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
             ('Your Score:' + str(self.player.score), Color.BLACK.value, 400, 200, Fonts.BASICFONT.value))
@@ -90,7 +79,6 @@ class World:
                     self.state = 2
                     self.player = Player()
                     self.ground = []
-                    self.start()
                     self.pressed_key = None
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
@@ -101,14 +89,66 @@ class World:
                     quit()
             else:
                 self.buttons.append((350, 500, 100, 50, Color.RED.value))
-        # ground 1, 2, 3, 4, 5, 6
+
+        #map screen
         elif self.state == 2:
+            #if berry clicked
+            if 1 in self.cleared_level:
+                if 70 + 200 > self.mouse[0] > 200 and 70 + 200 > self.mouse[1] >200:
+                    self.buttons.append((200, 200, 70, 70, Color.BRIGHT_GREEN.value))
+                    if self.click[0] == 1:
+                        self.level = 1
+                        self.start()
+                        self.state = 3
+                else:
+                    self.buttons.append((200, 200, 70, 70, Color.GREEN.value))
+            else:
+                if 70 + 200 > self.mouse[0] > 200 and 70 + 200 > self.mouse[1] >200:
+                    self.buttons.append((200, 200, 70, 70, Color.BRIGHT_RED.value))
+                else:
+                    self.buttons.append((200, 200, 70, 70, Color.RED.value))
+
+            #if pumpkin clicked
+            if 2 in self.cleared_level:
+                if 70 + 310 > self.mouse[0] > 310 and 70 + 400 > self.mouse[1] >400:
+                    self.buttons.append((310, 400, 70, 70, Color.BRIGHT_GREEN.value))
+                    if self.click[0] == 1:
+                        self.level = 2
+                        self.start()
+                        self.state = 3
+                else:
+                    self.buttons.append((310, 400, 70, 70, Color.GREEN.value))
+            else:
+                if 70 + 310 > self.mouse[0] > 310 and 70 + 400 > self.mouse[1] >400:
+                    self.buttons.append((310, 400, 70, 70, Color.BRIGHT_RED.value))
+                else:
+                    self.buttons.append((310, 400, 70, 70, Color.RED.value))
+
+            #if turkey clicked
+            if 3 in self.cleared_level:
+                if 70 + 500 > self.mouse[0] > 500 and 70 + 250 > self.mouse[1] >250:
+                    self.buttons.append((500, 250, 70, 70, Color.BRIGHT_GREEN.value))
+                    if self.click[0] == 1:
+                        self.level = 3
+                        self.start()
+                        self.state = 3
+                else:
+                    self.buttons.append((500, 250, 70, 70, Color.GREEN.value))
+            else:
+                if 70 + 500 > self.mouse[0] > 500 and 70 + 250 > self.mouse[1] >250:
+                    self.buttons.append((500, 250, 70, 70, Color.BRIGHT_RED.value))
+                else:
+                    self.buttons.append((500, 250, 70, 70, Color.RED.value))
+
+        # ground 1, 2, 3, 4, 5, 6
+        elif self.state == 3:
+            self.end = False
             self.trackObjects()
             self.obstacles.append((350,500,100,50))
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 10
-        elif self.state in [3, 4, 5]:
+        elif self.state in [4, 5]:
             self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
@@ -131,23 +171,22 @@ class World:
     def trackObjects(self):
         self.objects.append(self.player)
         self.user_input()
-        for s in self.ground[self.state - 2].spiders:
+        for s in self.ground[self.state - 3].spiders:
             if self.check_col(self.player, s):
-                self.player.x-=3
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
-        for h in self.ground[self.state - 2].h_spiders:
+        for h in self.ground[self.state - 3].h_spiders:
             if self.check_col(self.player, h):
                 h.delta = -h.delta
                 if self.player.hit():
                     #                    s.squeak()
                     self.state = 1
      
-        for b_idx, b in enumerate(self.ground[self.state - 2].berries):
+        for b_idx, b in enumerate(self.ground[self.state - 3].berries):
             if self.check_col(self.player, b):
                 self.player.pick()
-                self.ground[self.state - 2].berry_pick(b_idx)
+                self.ground[self.state - 3].berry_pick(b_idx)
         '''
         for block in self.ground[self.state-2].obstacles:
             if block.collidepoint(self.player.x+25):
@@ -194,12 +233,12 @@ class World:
         self.events = events
         self.run()
         self.player.refresh(self.events)
-        if self.state > 1:
-            for s in self.ground[self.state - 2].spiders:
+        if self.state > 2:
+            for s in self.ground[self.state - 3].spiders:
                 s.update()
-            for h in self.ground[self.state - 2].h_spiders:
+            for h in self.ground[self.state - 3].h_spiders:
                 h.update()
-            return self.texts, self.buttons, self.objects, self.ground[self.state - 2]
+            return self.texts, self.buttons, self.objects, self.ground[self.state - 3]
         else:
             return self.texts, self.buttons, self.objects, None
 

@@ -51,4 +51,11 @@ class LevelOne(Enum):
 
     ground4 = [[(60, h), (190, h), (230, h), (430, h), (520, h), (540, h)], \
                [(100, 1, y0), (500, 2, y0), (200, 1, y0), (270, 3, y0), (340, 2, y0), (430, 1, y0)], [] ]
-    g = [ground0, ground1, ground2, ground3, ground4]
+    g = [
+        # level one
+        [ground0, ground1, ground2, ground3],
+        # level two
+        [ground1, ground1, ground2, ground3],
+        # level three
+        [ground3, ground1, ground2, ground3]
+        ]

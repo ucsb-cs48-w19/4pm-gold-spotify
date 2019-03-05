@@ -41,12 +41,12 @@ class Player:
                 self.y = 450
                 self.isJump = 0
                 self.v = 10
-            self.rect = pygame.Rect(self.x, self.y, 25, 50)
+            self.rect = pygame.Rect(self.x, self.y, 66, 110)
 
     def move(self, direction):
         if self.state == 0:
             self.state += 1
-            self.index += 0.2
+            self.index += 0.5
         else:
             self.state = 0
         if self.index >= Dimensions.PLAYER_FRAME.value:
@@ -60,7 +60,7 @@ class Player:
             self.isJump = 1
 
         # print (self.y, self.F)
-        self.rect = pygame.Rect(self.x, self.y, 25, 50)
+        self.rect = pygame.Rect(self.x, self.y, 66, 110)
 
     def hit(self):
         if time.time() - self.immune_time >= 3:
