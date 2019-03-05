@@ -53,6 +53,22 @@ class World:
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
+        #map screen
+        #default all just go to state 2
+        elif self.state == -1:
+            #if berry clicked
+            if 70 + 200 > self.mouse[0] > 200 and 70 + 200 > self.mouse[1] >200:
+                if self.click[0]==1:
+                    self.state=2
+            #if pumpkin clicked
+            if 70 + 310 > self.mouse[0] > 310 and 70 + 400 > self.mouse[1] >400:
+                if self.click[0]==1:
+                    self.state=2
+            #if turkey clicked
+            if 70 + 500 > self.mouse[0] > 500 and 70 + 250 > self.mouse[1] >250:
+                if self.click[0]==1:
+                    self.state=2
+            
         # end game
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
@@ -108,8 +124,7 @@ class World:
             if self.player.x < 10:
                 self.state -= 1
                 self.player.x = 779
-#elif self.state == -1:
-
+    
         else:
             print("Unknown state", self.state)
 

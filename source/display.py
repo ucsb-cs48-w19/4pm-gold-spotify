@@ -21,7 +21,7 @@ class Display:
         self.bg_images["Welcome"] = pygame.image.load("../resources/Backgrounds/Welcome.png").convert_alpha()
         self.bg_images["LevelOne"] = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
         self.bg_images["End"] = pygame.image.load("../resources/Backgrounds/winPLACEHOLDER.png")
-        self.bg_images["Map"] = pygame.image.load("../resources/Backgrounds/map.png").convert_alpha()
+        self.bg_images["Map"] = pygame.image.load("../resources/Backgrounds/map_screen.png").convert_alpha()
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
 
@@ -37,6 +37,10 @@ class Display:
         self.berry_image_big = pygame.image.load("../resources/Berry/berry_big.png").convert_alpha()
         self.pumpkin_image_big = pygame.image.load("../resources/Pumpkin/pumpkin_big.png").convert_alpha()
         self.turkey_image_big = pygame.image.load("../resources/Turkey/turkey_big.png").convert_alpha()
+        self.turkey_image_big = pygame.transform.scale(self.turkey_image_big, (70, 70))
+        self.pumpkin_image_big = pygame.transform.scale(self.pumpkin_image_big, (70, 70))
+        self.berry_image_big = pygame.transform.scale(self.berry_image_big, (70, 70))
+
 
         self.spider_image = pygame.image.load("../resources/Spider/spider.png").convert_alpha()
         self.spider_image = pygame.transform.scale(self.spider_image, (35, 30))
@@ -99,8 +103,8 @@ class Display:
             self.bg = self.bg_images["Map"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
             self.canvas.blit(self.berry_image_big, (200,200))
-            self.canvas.blit(self.pumpkin_image_big, (350,350))
-            self.canvas.blit(self.turkey_image_big, (500,300))
+            self.canvas.blit(self.pumpkin_image_big, (310,400))
+            self.canvas.blit(self.turkey_image_big, (500,250))
                 
  # draw all the objects
         for player in objects:
