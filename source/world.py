@@ -56,16 +56,17 @@ class World:
         # end game
         elif self.state == 1:
             self.buttons.append((285, 75, 230, 50, Color.WHITE.value))
-            if self.end == False:
+            if not self.end:
                 self.texts.append(('You didn\'t make it...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            elif self.player.score >= 20 and self.end == True:
+                self.texts.append(('Try Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
+            elif self.player.score >= 20 and self.end:
                 self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
-            elif self.player.score <=20 and self.end == True:
+                self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
+            elif self.player.score < 20 and self.end:
                 self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
             ('Your Score:' + str(self.player.score), Color.BLACK.value, 400, 200, Fonts.BASICFONT.value))
-            self.texts.append(('Start Again', Color.WHITE.value, 400, 375, Fonts.SMALLFONT.value))
             self.texts.append(('Exit Game', Color.WHITE.value, 400, 525, Fonts.SMALLFONT.value))
             # draw and detect start again button
             if 350 + 100 > self.mouse[0] > 350 and 350 + 50 > self.mouse[1] > 350:

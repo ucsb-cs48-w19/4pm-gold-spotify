@@ -20,7 +20,6 @@ class Display:
         self.bg_images = {}
         self.bg_images["Welcome"] = pygame.image.load("../resources/Backgrounds/Welcome.png").convert_alpha()
         self.bg_images["LevelOne"] = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
-        self.bg_images["End"] = pygame.image.load("../resources/Backgrounds/winPLACEHOLDER.png")
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
 
@@ -75,22 +74,22 @@ class Display:
             for b in ground.berries:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
-            self.transparentRect = pygame.Surface((400,600))
-            self.transparentRect.set_alpha(128)
-            self.transparentRect.fill((255,255,255))
-            self.canvas.blit(self.transparentRect,(200,0))
+            # self.transparentRect = pygame.Surface((400,600))
+            # self.transparentRect.set_alpha(128)
+            # self.transparentRect.fill((255,255,255))
+            # self.canvas.blit(self.transparentRect,(200,0))
             self.bg = self.bg_images["Welcome"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
        
         if self.world.state == 1:
-            self.bg = self.bg_images["End"]
+            self.bg = self.bg_images["Welcome"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
        
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
       
- # draw all the objects
+        # draw all the objects
         for player in objects:
             image = self.player_images[int(player.index)]
             image = pygame.transform.scale(image, (66, 110))

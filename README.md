@@ -14,6 +14,8 @@ You are a little girl wandering through the dark forests, searching for the ingr
 ```python3 -m pip install -U pygame --user```
 * To clone this repo
 ```git clone git@github.com:ucsb-cs48-w19/4pm-turkey-trot.git```
+* Go into the project directory 
+```cd 4pm-turkey-trot```
 * Go into the source directory
 ```cd source```
 * Run the game
@@ -27,7 +29,14 @@ You are a little girl wandering through the dark forests, searching for the ingr
 ---
 
 ## Known Problems
-* When running this game on a Mac or a computer with a Retina screen, expect slowness of delays since more pixels must be updated. For the best game experience, run on a computer with a lower definition screen. 
+* For the best game experience, run on a computer with a lower definition screen.
+* When running this game on a Mac with a Retina screen, if there is slowness or delays, refer to the following instructions 
+1. Run the game ```python3 main.py```
+2. In the dock you will see a snake with controllers in his mouth. Right click him.
+3. Go to Options and click "Show in Finder"
+4. Finder will open and you will see a the python application in the shape of a rocket
+5. Right click the python application and click "Get Info"
+6. Check the box "Open in Low Resolution" and it should now run at around 60fps
 ---
 
 ## Contributing
