@@ -95,7 +95,7 @@ class World:
                 self.buttons.append((310, 75, 180, 50, Color.WHITE.value))
                 self.cleared_level.add(self.level + 1)
             elif self.player.score <=20 and self.end:
-                self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+                self.texts.append(('Not enough food...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
                 self.buttons.append((220, 75, 350, 50, Color.WHITE.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
@@ -240,7 +240,7 @@ class World:
                 self.player.move('left')
             elif self.pressed_key == pygame.K_d:
                 self.player.move('right')
-            elif self.pressed_key == pygame.K_w:
+            elif self.pressed_key == pygame.K_SPACE:
                 self.player.move('jump')
         for event in self.events:
             if event.type == pygame.KEYDOWN:
@@ -252,7 +252,7 @@ class World:
                 elif event.key == pygame.K_d:
                     self.player.move('right')
                     self.pressed_key = pygame.K_d
-                elif event.key == pygame.K_w:
+                elif event.key == pygame.K_SPACE:
                     self.player.move('jump')
                 else:
                     print("Unknown key")
