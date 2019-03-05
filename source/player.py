@@ -18,7 +18,7 @@ class Player:
         self.isJump = 0
         self.v = 10
         self.m = 2
-        self.speed = 3
+        self.speed = 8
 
     def update(self, events):
         self.events = events
