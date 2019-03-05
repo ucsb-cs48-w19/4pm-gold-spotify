@@ -8,7 +8,7 @@ from gameConstants import Fonts
 class Display:
     def __init__(self):
         pygame.init()
-#        pygame.mixer.init()
+        #pygame.mixer.init()
         self.clock = pygame.time.Clock()
         self.clock.tick(60)
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
@@ -72,7 +72,7 @@ class Display:
                 pygame.draw.line(self.canvas, Color.WHITE.value, (s.x + 13,0), (s.x + 13, s.rect.top + 4), 2)
             for h in ground.h_spiders:
                 self.canvas.blit(self.spider_image, h.rect)
-            for b in ground.berries:
+            for b in ground.food:
                 self.canvas.blit(self.berry_image, b.rect)
         if self.world.state == 0:
             self.bg = self.bg_images["Welcome"]

@@ -12,13 +12,13 @@ class Ground:
 
     def __init__(self, level):
         self.spiders = []
-        self.berries = []
+        self.food = []
         self.h_spiders = []
         self.start(level)
 
     def start(self, level):
         for b in LevelOne.g.value[level][0]:
-            self.berries.append(Berry(b[0], b[1]))
+            self.food.append(Berry(b[0], b[1]))
         for s in LevelOne.g.value[level][1]:
             #self.spiders.append(Spider(s[0], s[1]*3, s[2]))
             self.spiders.append(Spider(s[0], s[1], s[2]))
@@ -31,4 +31,4 @@ class Ground:
             self.h_spiders.append(Hor_Spider(h[0], h[1], h[2]) )
 
     def berry_pick(self, idx):
-        del self.berries[idx]
+        del self.food[idx]

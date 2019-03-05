@@ -61,7 +61,7 @@ class World:
             elif self.player.score >= 20 and self.end == True:
                 self.texts.append(('You did it!', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             elif self.player.score <=20 and self.end == True:
-                self.texts.append(('Not enough berries...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
+                self.texts.append(('Not enough ingredients...', Color.BLACK.value, 400, 100, Fonts.BASICFONT.value))
             self.buttons.append((275, 175, 250, 50, Color.WHITE.value))
             self.texts.append(
             ('Your Score:' + str(self.player.score), Color.BLACK.value, 400, 200, Fonts.BASICFONT.value))
@@ -92,7 +92,7 @@ class World:
             if self.player.x >= 780:
                 self.state += 1
                 self.player.x = 10
-        elif self.state in [3, 4, 5, 6, 7, 8]:
+        elif self.state in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
             self.trackObjects()
             if self.player.x >= 780:
                 self.state += 1
@@ -100,7 +100,7 @@ class World:
             if self.player.x < 10:
                 self.state -= 1
                 self.player.x = 779
-        elif self.state == 9:
+        elif self.state == 13:
             self.trackObjects()
             if self.player.x >= 780:
                 self.end = True
@@ -118,14 +118,14 @@ class World:
         for s in self.ground[self.state - 2].spiders:
             if self.check_col(self.player, s):
                 if self.player.hit():
-                    s.squeak()
+                    #s.squeak()
                     self.state = 1
         for h in self.ground[self.state - 2].h_spiders:
             if self.check_col(self.player, h):
                 if self.player.hit():
-                    #                    s.squeak()
+                    #s.squeak()
                     self.state = 1
-        for b_idx, b in enumerate(self.ground[self.state - 2].berries):
+        for b_idx, b in enumerate(self.ground[self.state - 2].food):
             if self.check_col(self.player, b):
                 self.player.pick()
                 self.ground[self.state - 2].berry_pick(b_idx)

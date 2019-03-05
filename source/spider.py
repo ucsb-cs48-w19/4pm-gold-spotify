@@ -14,7 +14,7 @@ class Spider(pygame.sprite.Sprite):
 
     def __init__(self, x, speed, y = 0):
         pygame.sprite.Sprite.__init__(self)
-        # self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
+        #self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
         # Change this later to spider image
         self.rect = pygame.Rect(x, y, 10, 10)
         self.rect.center = (x, y)
@@ -32,8 +32,8 @@ class Spider(pygame.sprite.Sprite):
             self.delta = abs(self.speed)
         self.rect.y += self.delta
 
-    def squeak(self):
-        self.mixer.play()
+    #def squeak(self):
+        #self.mixer.play()
 
 
 class Hor_Spider(pygame.sprite.Sprite):
