@@ -49,7 +49,7 @@ class World:
                 self.buttons.append((350, 350, 100, 50, Color.BRIGHT_GREEN.value))
                 # switch state if user click
                 if self.click[0] == 1:
-                    self.state = 2
+                    self.state = -1
             else:
                 self.buttons.append((350, 350, 100, 50, Color.GREEN.value))
 
@@ -108,6 +108,7 @@ class World:
             if self.player.x < 10:
                 self.state -= 1
                 self.player.x = 779
+#elif self.state == -1:
 
         else:
             print("Unknown state", self.state)

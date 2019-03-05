@@ -21,6 +21,7 @@ class Display:
         self.bg_images["Welcome"] = pygame.image.load("../resources/Backgrounds/Welcome.png").convert_alpha()
         self.bg_images["LevelOne"] = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
         self.bg_images["End"] = pygame.image.load("../resources/Backgrounds/winPLACEHOLDER.png")
+        self.bg_images["Map"] = pygame.image.load("../resources/Backgrounds/map.png").convert_alpha()
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
 
@@ -40,6 +41,7 @@ class Display:
         self.heart = pygame.transform.scale(self.heart, (30, 30))
         self.heart_b = pygame.image.load('../resources/Heart/heart_b.png').convert_alpha()
         self.heart_b = pygame.transform.scale(self.heart_b, (30, 30))
+
 
     def start(self):
         # for now, it just straight call the game loop
@@ -89,7 +91,12 @@ class Display:
         if self.world.state in [2,6]:
             self.bg = self.bg_images["LevelOne"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
-      
+        
+        if self.world.state == -1:
+            self.bg = self.bg_images["Map"]
+            self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
+            self.canvas.blit(self.berry_image, (300,300))
+                
  # draw all the objects
         for player in objects:
             image = self.player_images[int(player.index)]
