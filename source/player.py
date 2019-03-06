@@ -19,10 +19,11 @@ class Player:
         self.v = 10
         self.m = 2
         self.speed = 8
+        self.isJumpSound = 0
+        self.isHitSound = 0
+        self.isCollectSound = 0
 
-        self.jump_s = pygame.mixer.Sound("../resources/sound/jump.wav")
-        self.collect_s = pygame.mixer.Sound("../resources/sound/Pickup_Coin.wav")
-        self.hit_s = pygame.mixer.Sound("../resources/sound/hit.wav")
+
 
     def update(self, events):
         self.events = events
@@ -61,23 +62,26 @@ class Player:
         elif direction == 'right' and self.x < 780:
             self.x += self.speed
         elif direction == 'jump' and self.y <= 450:
-            pygame.mixer.Sound.play(self.jump_s)
+            self.isJumpSound = 1
             self.isJump = 1
 
         # print (self.y, self.F)
         self.rect = pygame.Rect(self.x, self.y, 66, 110)
 
     def hit(self):
+        self.isHitSound = 1
         if time.time() - self.immune_time >= 3:
             self.flash = 30
             self.health -= 1
             self.immune_time = time.time()
-            pygame.mixer.Sound.play(self.hit_s)
+
         return self.health <= 0
 
     def pick(self):
+
+        self.isCollectSound = 1
         self.score += 1
-        pygame.mixer.Sound.play(self.collect_s)
+
         return self.score
 
     def blink(self):
