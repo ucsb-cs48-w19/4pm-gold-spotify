@@ -53,6 +53,9 @@ class Display:
 
         #background music playing
         self.background_s = pygame.mixer.music.load("../resources/sound/background_music.ogg")
+        self.jump_s = pygame.mixer.Sound("../resources/sound/jump.wav")
+        self.collect_s = pygame.mixer.Sound("../resources/sound/Pickup_Coin.wav")
+        self.hit_s = pygame.mixer.Sound("../resources/sound/hit.wav")
         pygame.mixer.music.set_volume(0.4)
 
     def start(self):
@@ -120,6 +123,19 @@ class Display:
             image = pygame.transform.scale(image, (66, 110))
             if not player.blink():
                 self.canvas.blit(image, player.rect)
+
+            if player.isJumpSound:
+                pygame.mixer.Sound.play(self.jump_s)
+                player.isJumpSound = 0
+
+            if player.isHitSound:
+                pygame.mixer.Sound.play(self.hit_s)
+                player.isHitSound = 0
+
+            if player.isCollectSound:
+                pygame.mixer.Sound.play(self.collect_s)
+                player.isCollectSound = 0
+
             # TODO: Hard coded max health
             for i in range(5):
                 if i < player.health:
@@ -143,3 +159,4 @@ class Display:
             # render them
             #self.draw_game(texts, buttons, objects, ground, obstacles)
             self.draw_game(texts, buttons, objects, ground)
+
