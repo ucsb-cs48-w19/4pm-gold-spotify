@@ -89,7 +89,6 @@ class Player:
 
     def blink(self):
         if time.time() - self.immune_time < 3:
-            self.isImmune = 0
             if self.flash == 0:
                 self.flash = 30
             self.flash -= 1
