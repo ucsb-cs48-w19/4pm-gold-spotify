@@ -203,7 +203,6 @@ class World:
         self.user_input()
         for s in self.ground[self.state - 3].spiders:
             if self.check_col(self.player, s):
-                #s.delta = -s.delta
                 if self.player.hit():
                     self.state = 1
 
@@ -212,22 +211,13 @@ class World:
                 h.delta = -h.delta
                 if self.player.hit():
                     
-                    #                    s.squeak()
                     self.state = 1
      
         for b_idx, b in enumerate(self.ground[self.state - 3].foods):
             if self.check_col(self.player, b):
                 self.player.pick()
                 self.ground[self.state - 3].food_pick(b_idx)
-        '''
-        for block in self.ground[self.state-2].obstacles:
-            if block.collidepoint(self.player.x+25):
-                player.x -=1
-            if block.collidepoint(self.player.x):
-                player.x +=1
-            if block.collidepoint(self.player.y+50):
-                player.y -=1
-        '''   
+        
         self.buttons.append((1, 10, 100, 30, Color.WHITE.value))
         self.texts.append(
                 ('Score:' + str(self.player.score), Color.BLACK.value, 50, 25, Fonts.SMALLFONT.value))

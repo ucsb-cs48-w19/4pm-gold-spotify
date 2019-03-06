@@ -20,7 +20,8 @@ class Display:
         self.bg_images = {}
         self.bg_images["Welcome"] = pygame.image.load("../resources/Backgrounds/Welcome.png").convert_alpha()
         self.bg_images["LevelOne"] = pygame.image.load("../resources/Backgrounds/LevelOneBackground.png").convert_alpha()
-        self.bg_images["End"] = pygame.image.load("../resources/Backgrounds/winPLACEHOLDER.png")
+        self.bg_images["LevelTwo"] = pygame.image.load("../resources/Backgrounds/LevelTwoBackground.png").convert_alpha()
+        self.bg_images["LevelThree"] = pygame.image.load("../resources/Backgrounds/LevelThreeBackground.png").convert_alpha()
         self.bg_images["Map"] = pygame.image.load("../resources/Backgrounds/map_screen.png").convert_alpha()
         self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         self.rect = self.bg.get_rect()
@@ -65,7 +66,12 @@ class Display:
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
 
         if self.world.state in [3, 6]:
-            self.bg = self.bg_images["LevelOne"]
+            if self.world.level == 1:
+                self.bg = self.bg_images["LevelOne"]
+            elif self.world.level == 2:
+                self.bg = self.bg_images["LevelTwo"]
+            elif self.world.level == 3:
+                self.bg = self.bg_images["LevelThree"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         # map screen
 
@@ -90,11 +96,7 @@ class Display:
         # draw all the buttons
         for button in buttons:
             pygame.draw.rect(self.canvas, button[4], (button[0], button[1], button[2], button[3]))
-        '''
-        #draw in the obstacles
-        for block in obstacles:
-            pygame.draw.rect(self.canvas, Color.BLACK.value, (block[0], block[1], block[2], block[3]))
-        '''
+        
         # draw all texts
         for t in texts:
             text = t[4].render(t[0], True, t[1])
