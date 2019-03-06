@@ -32,6 +32,8 @@ class World:
         self.click = pygame.mouse.get_pressed()
 
     def start(self):
+        self.player = Player()
+        self.ground = []
         for i in range(len(LevelOne.g.value[self.level - 1])):
             self.ground.append(Ground(self.level - 1, i))
 
