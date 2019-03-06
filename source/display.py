@@ -66,7 +66,12 @@ class Display:
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
 
         if self.world.state in [3, 6]:
-            self.bg = self.bg_images["LevelOne"]
+            if self.world.level == 1:
+                self.bg = self.bg_images["LevelOne"]
+            elif self.world.level == 2:
+                self.bg = self.bg_images["LevelTwo"]
+            elif self.world.level == 3:
+                self.bg = self.bg_images["LevelThree"]
             self.bg = pygame.transform.scale(self.bg, (Dimensions.WIDTH.value, Dimensions.HEIGHT.value))
         # map screen
 
