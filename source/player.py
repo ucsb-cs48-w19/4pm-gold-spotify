@@ -24,7 +24,7 @@ class Player:
         self.isHitSound = 0
         self.isCollectSound = 0
 
-
+        self.startImmune = 0
 
     def update(self, events):
         self.events = events
@@ -77,6 +77,9 @@ class Player:
             self.flash = 30
             self.health -= 1
             self.immune_time = time.time()
+            self.startImmune = self.startImmune + 1
+        else:
+            self.startImmune = 0
 
         return self.health <= 0
 
@@ -89,6 +92,7 @@ class Player:
 
     def blink(self):
         if time.time() - self.immune_time < 3:
+            self.isImmune = 0
             if self.flash == 0:
                 self.flash = 30
             self.flash -= 1

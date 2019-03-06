@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 from world import World
 
 from gameConstants import Color
@@ -56,7 +56,7 @@ class Display:
         self.background_s = pygame.mixer.music.load("../resources/sound/background_music.ogg")
         self.jump_s = pygame.mixer.Sound("../resources/sound/jump.wav")
         self.collect_s = pygame.mixer.Sound("../resources/sound/Pickup_Coin.wav")
-        self.hit_s = pygame.mixer.Sound("../resources/sound/hit.wav")
+        self.hit_s = pygame.mixer.Sound("../resources/sound/spiderSqueak.wav")
         pygame.mixer.music.set_volume(0.4)
 
     def start(self):
@@ -130,13 +130,15 @@ class Display:
                 else:
                     self.canvas.blit(pygame.transform.flip(image, True, False), player.rect)
 
+
             if player.isJumpSound:
                 pygame.mixer.Sound.play(self.jump_s)
                 player.isJumpSound = 0
 
             if player.isHitSound:
-                pygame.mixer.Sound.play(self.hit_s)
-                player.isHitSound = 0
+                if player.startImmune == 1:
+                    pygame.mixer.Sound.play(self.hit_s)
+                    player.isHitSound = 0
 
             if player.isCollectSound:
                 pygame.mixer.Sound.play(self.collect_s)
@@ -149,7 +151,6 @@ class Display:
                 else:
                     self.canvas.blit(self.heart_b, (600 + i * 40, 10))
         pygame.display.flip()
-
 
     # the game loop
     def refresh(self):
