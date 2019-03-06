@@ -1,4 +1,4 @@
-import pygame, time
+import pygame
 from world import World
 
 from gameConstants import Color
