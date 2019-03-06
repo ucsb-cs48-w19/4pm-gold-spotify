@@ -1,8 +1,9 @@
 import pygame
+import math
 from gameConstants import Color
 from gameConstants import Dimensions
 from gameConstants import Fonts
-# from gameConstants import Sounds
+from gameConstants import Sounds
 
 class Spider(pygame.sprite.Sprite):
     '''
@@ -13,7 +14,7 @@ class Spider(pygame.sprite.Sprite):
 
     def __init__(self, x, speed, y = 0):
         pygame.sprite.Sprite.__init__(self)
-        # self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
+        #self.mixer = pygame.mixer.music.load(Sounds.SpiderSqueak.value)
         # Change this later to spider image
         self.rect = pygame.Rect(x, y, 10, 10)
         self.rect.center = (x, y)
@@ -24,16 +25,15 @@ class Spider(pygame.sprite.Sprite):
         self.x = x
 
     def update(self):
+        
         if self.rect.bottom > ((4 * Dimensions.HEIGHT.value / 5)):
-            self.delta = -self.speed
-
+            self.delta = -abs(self.speed)
         if self.rect.top < (0):
-            self.delta = self.speed
-
+            self.delta = abs(self.speed)
         self.rect.y += self.delta
 
-#    def squeak(self):
-#        self.mixer.play()
+    #def squeak(self):
+        #self.mixer.play()
 
 
 class Hor_Spider(pygame.sprite.Sprite):
