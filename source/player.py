@@ -19,6 +19,7 @@ class Player:
         self.v = 10
         self.m = 2
         self.speed = 8
+        self.orientation = 'RIGHT'
         self.isJumpSound = 0
         self.isHitSound = 0
         self.isCollectSound = 0
@@ -58,8 +59,10 @@ class Player:
             self.index = 0
 
         if direction == 'left' and self.x >= 10:
+            self.orientation = 'LEFT'
             self.x -= self.speed
         elif direction == 'right' and self.x < 780:
+            self.orientation = 'RIGHT'
             self.x += self.speed
         elif direction == 'jump' and self.y <= 450:
             self.isJumpSound = 1

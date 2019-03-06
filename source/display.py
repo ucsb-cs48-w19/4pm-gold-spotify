@@ -125,7 +125,10 @@ class Display:
             image = self.player_images[int(player.index)]
             image = pygame.transform.scale(image, (66, 110))
             if not player.blink():
-                self.canvas.blit(image, player.rect)
+                if player.orientation == 'RIGHT':
+                    self.canvas.blit(image, player.rect)
+                else:
+                    self.canvas.blit(pygame.transform.flip(image, True, False), player.rect)
 
             if player.isJumpSound:
                 pygame.mixer.Sound.play(self.jump_s)
