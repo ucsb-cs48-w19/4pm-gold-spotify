@@ -8,7 +8,7 @@ from gameConstants import Fonts
 class Display:
     def __init__(self):
         pygame.init()
-#        pygame.mixer.init()
+        #pygame.mixer.init()
         self.clock = pygame.time.Clock()
         self.clock.tick(60)
         self.canvas = pygame.display.set_mode((Dimensions.WIDTH.value, Dimensions.HEIGHT.value), 0, 32)
@@ -101,6 +101,7 @@ class Display:
             textRect = text.get_rect()
             textRect.center = (t[2], t[3])
             self.canvas.blit(text, textRect)
+
 
         if self.world.state == 2:
             self.bg = self.bg_images["Map"]

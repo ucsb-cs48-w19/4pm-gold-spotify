@@ -170,7 +170,7 @@ class World:
                 else:
                     self.buttons.append((500, 250, 70, 70, Color.RED.value))
 
-        # ground 1, 2, 3, 4, 5, 6
+         # ground 1, 2, 3, 4, 5, 6
         elif self.state == 3:
             self.end = False
             self.trackObjects()
