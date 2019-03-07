@@ -6,7 +6,7 @@
 A Thanksgiving-themed sidescrolling game written with PyGame.
 
 ### Additional Information
-You are a little girl wandering through the dark forests, searching for the ingredients to assemble the ultimate Thanksgiving feast for your family. Avoid horrible monsters to achieve your culinary dreams.
+You are a little girl wandering through the dark forests, searching for the ingredients to assemble the ultimate Thanksgiving feast for your family. Avoid the horrible spiders in the forest to achieve your culinary dreams.
 
 ## Installation (for developers)
 * Install python 3.0 or higher [here](https://www.python.org/)
