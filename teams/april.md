@@ -1,1 +1,0 @@
-Hi! I'm April, a second year CS started. I came to UCSB as an Economics and Accounting major before switching to CS. I'm really excited to be taking this course and working with this team. I hope to learn a lot more about the development process and working with a team on a big project.
