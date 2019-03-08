@@ -40,7 +40,7 @@ You are a little girl wandering through the dark forests, searching for the ingr
 4. Finder will open and you will see a the python application in the shape of a rocket
 5. Right click the python application and click "Get Info"
 6. Check the box "Open in Low Resolution" and it should now run at around 60fps
-[source](https://stackoverflow.com/questions/31685936/pygame-application-runs-slower-on-mac-than-on-pc)
+* [source](https://stackoverflow.com/questions/31685936/pygame-application-runs-slower-on-mac-than-on-pc)
 ---
 
 ## Contributing
