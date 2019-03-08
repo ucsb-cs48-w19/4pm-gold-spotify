@@ -12,8 +12,9 @@ You are a little girl wandering through the dark forests, searching for the ingr
 * Install python 3.0 or higher [here](https://www.python.org/)
 * Install pygame 
 ```python3 -m pip install -U pygame --user```
+  * Note: this may require the sudo command
 * To clone this repo
-```git clone git@github.com:ucsb-cs48-w19/4pm-turkey-trot.git```
+```git clone https://github.com/ucsb-cs48-w19/4pm-turkey-trot.git```
 * Go into the project directory 
 ```cd 4pm-turkey-trot```
 * Go into the source directory
